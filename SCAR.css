@@ -1,0 +1,44 @@
+th, td {
+    text-align: center;
+    padding: 2px 10px;
+    border: solid black 1px;
+    font-size: 10px;
+}
+
+.grid {
+    display: grid;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.section {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.crimson {
+    background-color: #e06666;
+}
+.gray {
+    background-color: #ccc;
+}
+.white {
+    background-color: #fff;
+}
+
+.large {
+    font-size: 14px;
+}
+
+.small {
+    font-size: 9px;
+}

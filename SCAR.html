@@ -1,0 +1,555 @@
+<div class="grid grid-2">
+    <div id="char_info_1" class="section">
+        <table>
+            <tr>
+                <th class="crimson" scope="row">Name:</th>
+                <td class="white">
+                    <input type="text" name="attr_name"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="crimson" scope="row">Player:</th>
+                <td class="white">
+                    <input type="text" name="attr_player"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="crimson" scope="row">World:</th>
+                <td class="white">
+                    <input type="text" name="attr_world"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="crimson" scope="row">Species:</th>
+                <td class="white">
+                    <input type="text" name="attr_species"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="char_info_2" class="section">
+        <table>
+            <tr>
+                <th class="crimson" scope="row">Gender:</th>
+                <td class="white">
+                    <input type="text" name="attr_gender"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="crimson" scope="row">Age:</th>
+                <td class="white">
+                    <input type="number" name="attr_age" min="1"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="crimson" scope="row">Weight:</th>
+                <td class="white">
+                    <input type="text" name="attr_weight"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="crimson" scope="row">Height:</th>
+                <td class="white">
+                    <input type="text" name="attr_height"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<button type="action" name="act_skill_check">Make Skill Check</button>
+<div class="grid grid-3">
+    <div id="attributes" class="section">
+        <table>
+            <tr>
+                <th class="crimson large" colspan="3" scope="colgroup">Attributes</th>
+                <th class="gray large" scope="col">B</th>
+            </tr>
+            <tr>
+                <th class="gray" colspan="4" scope="colgroup">Primary Attributes</th>
+            </tr>
+            <tr class="small">
+                <th class="gray" scope="row">Body</th>
+                <td id="body_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_body" min="1" max="10" value="1"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_body_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr class="small">
+                <th class="gray" scope="row">Mind</th>
+                <td id="mind_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_mind" min="1" max="10" value="1"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_mind_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr class="small">
+                <th class="gray" scope="row">Soul</th>
+                <td id="soul_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_soul" min="1" max="10" value="1"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_soul_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" colspan="4" scope="colgroup">Secondary Attributes</th>
+            </tr>
+            <tr class="small">
+                <th class="gray" scope="row">Vigor</th>
+                <td id="vigor_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_vigor" min="1" max="10" value="1"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_vigor_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr class="small">
+                <th class="gray" scope="row">Willpower</th>
+                <td id="willpower_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_willpower" min="1" max="10" value="1"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_willpower_bonus" value="0"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="expertise" class="section">
+        <table>
+            <tr>
+                <th class="crimson large" colspan="3" scope="colgroup">Expertise</th>
+                <th class="gray large" scope="col">B</th>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Charming</th>
+                <td id="charming_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_charming" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_charming_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Cunning</th>
+                <td id="cunning_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_cunning" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_cunning_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Empathetic</th>
+                <td id="empathetic_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_empathetic" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_empathetic_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Forceful</th>
+                <td id="forceful_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_forceful" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_forceful_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Innovative</th>
+                <td id="innovative_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_innovative" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_innovative_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Instinct</th>
+                <td id="instinct_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_instinct" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_instinct_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Logic</th>
+                <td id="logic_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_logic" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_logic_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Teamwork</th>
+                <td id="teamwork_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_teamwork" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_teamwork_bonus" value="0"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="natural_skills" class="section">
+        <table>
+            <tr>
+                <th class="crimson large" colspan="3" scope="colgroup">Natural Skills</th>
+                <th class="gray large" scope="col">B</th>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Athletics</th>
+                <td id="athletics_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_athletics" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_athletics_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Brawl</th>
+                <td id="brawl_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_brawl" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_brawl_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">
+                    Initiative
+                    <button type="roll" name="roll_init" value="/roll (@{initiative} + @{initiative_bonus} + 1)d10 &{tracker}"></button>
+                </th>
+                <td id="initiative_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_initiative" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_initiative_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Insight</th>
+                <td id="insight_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_insight" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_insight_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Integrity</th>
+                <td id="integrity_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_integrity" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_integrity_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Perception</th>
+                <td id="perception_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_perception" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_perception_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Persuasion</th>
+                <td id="persuasion_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_persuasion" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_persuasion_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Presence</th>
+                <td id="presence_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_presence" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_presence_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Send</th>
+                <td id="send_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_send" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_send_bonus" value="0"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="trained_skills" class="section">
+        <table>
+            <tr>
+                <th class="crimson large" colspan="3" scope="colgroup">Trained Skills</th>
+                <th class="gray large" scope="col">B</th>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Acrobatics</th>
+                <td id="acrobatics_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_acrobatics" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_acrobatics_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Clash</th>
+                <td id="clash_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_clash" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_clash_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Deception</th>
+                <td id="deception_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_deception" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_deception_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Evasion</th>
+                <td id="evasion_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_evasion" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_evasion_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Marksman</th>
+                <td id="marksman_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_marksman" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_marksman_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Navigation</th>
+                <td id="navigation_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_navigation" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_navigation_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Perform</th>
+                <td id="perform_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_perform" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_perform_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Subterfuge</th>
+                <td id="subterfuge_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_subterfuge" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_subterfuge_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Survival</th>
+                <td id="survival_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_survival" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_survival_bonus" value="0"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="knowledge_skills" class="section">
+        <table>
+            <tr>
+                <th class="crimson large" colspan="3" scope="colgroup">Knowledge Skills</th>
+                <th class="gray large" scope="col">B</th>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Academics</th>
+                <td id="academics_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_academics" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_academics_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Appraisal</th>
+                <td id="appraisal_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_appraisal" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_appraisal_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Craft</th>
+                <td id="craft_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_craft" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_craft_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Etiquette</th>
+                <td id="etiquette_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_etiquette" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_etiquette_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Investigation</th>
+                <td id="investigation_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_investigation" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_investigation_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Lore</th>
+                <td id="lore_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_lore" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_lore_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Medicine</th>
+                <td id="medicine_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_medicine" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_medicine_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Science</th>
+                <td id="science_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_science" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_science_bonus" value="0"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="gray" scope="row">Technology</th>
+                <td id="technology_dots" class="white"></td>
+                <td class="white">
+                    <input type="number" name="attr_technology" min="0" value="0" max="5"/>
+                </td>
+                <td class="gray">
+                    <input type="number" name="attr_technology_bonus" value="0"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="custom_skills" class="section">
+        <fieldset class="repeating_customskills">
+            <input type="text" name="attr_custom_name"/>
+            <input type="number" name="attr_custom_value" min="0" value="0" max="5"/>
+            <input type="number" name="attr_custom_value_bonus" value="0"/>
+        </fieldset>
+    </div>
+</div>
+
+<rolltemplate class="sheet-rolltemplate-test">
+    <div class="sheet-template-container">
+        <h1>{{name}}</h1>
+        <div class="sheet-results">
+            <h4>Result = {{roll1}}</h4>
+            <h4>Custom Result = {{computed::roll1}}</h4>
+        </div>
+    </div>
+</rolltemplate>
+
+<script type="text/worker">
+    const attributes = ["body", "mind", "soul"];
+    const expertises = ["charming", "cunning", "empathetic", "forceful", "innovative", "instinct", "logic", "teamwork"];
+
+    function query(name, options) {
+        let values = options
+            .map(o => o + ", @{" + o + "}+@{" + o + "_bonus}")
+            .join("|")
+        return "?{" + name + "|" + values + "}";
+    }
+
+    on('clicked:skill_check', (info) => {
+        startRoll("&{template:test} {{name=SkillCheck}} {{roll1=[[(" + query("Attribute", attributes) + "+" + query("Expertise", expertises) + ")d10]]}}", (results) => {
+            const total = results.results.roll1.result
+            const computed = total % 4;
+
+            console.log(results);
+
+            finishRoll(
+                results.rollId,
+                {
+                    roll1: computed
+                }
+            );
+        });
+    });
+</script>
