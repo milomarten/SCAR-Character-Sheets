@@ -42,3 +42,19 @@ th, td {
 .small {
     font-size: 9px;
 }
+
+/* configure the tab buttons */
+.charsheet .basic,
+.charsheet .combat {
+    display: none;
+}
+
+/* style the active button */
+.charsheet .sheet-tabstoggle[value="basic"] ~ div .sheet-button0 {outline: 2px solid red;}
+.charsheet .sheet-tabstoggle[value="combat"] ~ div .sheet-button1 {outline: 2px solid red;}
+
+/* show the selected tab */
+.charsheet .sheet-tabstoggle[value="basic"] ~ div.basic,
+.charsheet .sheet-tabstoggle[value="combat"] ~ div.combat {
+    display: block;
+}
