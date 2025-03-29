@@ -56,6 +56,71 @@
         </table>
     </div>
 </div>
+<div class="grid grid-2">
+    <div id="stats" class="section">
+        <table>
+            <tr>
+                <th class="crimson large" colspan="6">Quick Reference Stats</th>
+            </tr>
+            <tr>
+                <th class="gray">CHP</th>
+                <th class="gray">MHP</th>
+                <th class="gray">THP</th>
+                <th class="gray">EMHP</th>
+                <th class="gray">C Exh</th>
+                <th class="gray">Exh P</th>
+            </tr>
+            <tr class="white large">
+                <td><input type="number" name="attr_hp" value="0"/></td>
+                <td>
+                    <input type="hidden" name="attr_hp_max" value="0"/>
+                    <span name="attr_hp_max"></span>
+                </td>
+                <td><input type="number" name="attr_temp_hp" value="0"/></td>
+                <td><input type="number" name="attr_extra_max_hp" value="0"/></td>
+                <td><input type="number" name="attr_current_exhaustion" value="0"/></td>
+                <td><input type="number" name="attr_exhaustion_penalty" value="0"/></td>
+            </tr>
+            <tr>
+                <th class="gray">PEv</th>
+                <th class="gray">PI</th>
+                <th class="gray">SEv</th>
+                <th class="gray">SI</th>
+                <th class="gray">SS</th>
+                <th class="gray">BPS</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="hidden" name="attr_physical_evasion">
+                    <span name="attr_physical_evasion"></span>
+                </td>
+                <td>
+                    <input type="hidden" name="attr_physical_integrity">
+                    <span name="attr_physical_integrity"></span>
+                </td>
+                <td>
+                    <input type="hidden" name="attr_special_evasion">
+                    <span name="attr_special_evasion"></span>
+                </td>
+                <td>
+                    <input type="hidden" name="attr_special_integrity">
+                    <span name="attr_special_integrity"></span>
+                </td>
+                <td>
+                    <input type="hidden" name="attr_soul_save">
+                    <span name="attr_soul_save"></span>
+                </td>
+                <td>
+                    <input type="hidden" name="attr_boost_per_session">
+                    <span name="attr_boost_per_session"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="movement" class="section">
+
+    </div>
+</div>
 <button type="action" name="act_skill_check">Make Skill Check</button>
 <button type="action" name="act_dot_roll">Do Dot Roll</button>
 <div class="grid grid-3">
@@ -539,12 +604,18 @@
         let values = options
             .map(o => o + ", @{" + o + "}+@{" + o + "_bonus}")
             .join("|")
-        values = "none, 0|" + values; 
+        values = values + "|none, 0"; 
         return "?{" + name + "|" + values + "}";
     }
 
+    function max_stat(options, results) {
+        var totals = options
+            .map(stat => parseInt(results[stat]) + parseInt(results[stat + "_bonus"]));
+        return Math.max(...totals);
+    }
+
     on('clicked:skill_check', (info) => {
-        roll = `[[(${query("Attribute", attributes)} + ${query("Expertise", expertises)} + ${query("Skill", skills)})d10>?{Difficulty?|7}f1!]]`;
+        roll = `[[(${query("Attribute", attributes)} + ${query("Expertise", expertises)} + ${query("Skill", skills)} + ?{Pool Bonus|0})d10>?{Difficulty?|7}f1!]]`;
         startRoll("&{template:test} {{name=Skill Check}} {{roll1=" + roll + "}}", (results) => {
             const total = results.results.roll1.result
             const numberOfTens = results.results.roll1.dice.filter(i => i == 10).length;
@@ -570,6 +641,52 @@
                     roll1: total + numberOfTens
                 }
             );
+        });
+    });
+
+    // Max HP calculation
+    const maxHpStats = ['body', 'body_bonus', 'mind', 'mind_bonus', 'soul', 'soul_bonus', 'vigor', 'vigor_bonus', 'willpower', 'willpower_bonus', 'extra_max_hp'];
+    on(maxHpStats.map(stat => `change:${stat}`).join(' '), () => {
+        getAttrs(maxHpStats, values => {
+            let total = Object.values(values)
+                .map(a => parseInt(a))
+                .reduce((a, b) => a + b, 0);
+            setAttrs({
+                "hp_max": total
+            })
+        });
+    });
+
+    // Evasion and Integrity calculations
+    const evasionIntegrityStats = ['body', 'mind', 'soul', ...expertises, 'evasion', 'integrity'].flatMap(stat => [stat, `${stat}_bonus`]);
+    on(evasionIntegrityStats.map(stat => `change:${stat}`).join(' '), () => {
+        getAttrs(evasionIntegrityStats, values => {
+            var body = parseInt(values.body);
+            var mind = parseInt(values.mind);
+            var soul = parseInt(values.soul);
+            var expertise = max_stat(expertises, values);
+            var evasion = parseInt(values.evasion);
+            var integrity = parseInt(values.integrity);
+
+            setAttrs({
+                "physical_evasion": Math.round((body + expertise + evasion) / 2),
+                "physical_integrity": Math.round((body + expertise + integrity) / 2),
+                "special_evasion": Math.round((mind + expertise + evasion) / 2),
+                "special_integrity": Math.round((mind + expertise + integrity) / 2),
+                "soul_save": Math.round((soul + expertise + integrity) / 2)
+            })
+        });
+    });
+
+    // Boost Per Session calculation
+    on(attributes.map(stat => `change:${stat}`).join(' '), () => {
+        getAttrs(attributes, values => {
+            let total = Object.values(values)
+                .map(a => parseInt(a))
+                .reduce((a, b) => a + b, 0);
+            setAttrs({
+                "boost_per_session": Math.round(total / 3)
+            })
         });
     });
 </script>
