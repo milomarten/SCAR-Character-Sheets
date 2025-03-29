@@ -57,6 +57,7 @@
     </div>
 </div>
 <button type="action" name="act_skill_check">Make Skill Check</button>
+<button type="action" name="act_dot_roll">Do Dot Roll</button>
 <div class="grid grid-3">
     <div id="attributes" class="section">
         <table>
@@ -520,8 +521,7 @@
     <div class="sheet-template-container">
         <h1>{{name}}</h1>
         <div class="sheet-results">
-            <h4>Result = {{roll1}}</h4>
-            <h4>Custom Result = {{computed::roll1}}</h4>
+            <h4>Result = {{computed::roll1}}</h4>
         </div>
     </div>
 </rolltemplate>
@@ -529,25 +529,45 @@
 <script type="text/worker">
     const attributes = ["body", "mind", "soul"];
     const expertises = ["charming", "cunning", "empathetic", "forceful", "innovative", "instinct", "logic", "teamwork"];
+    const skills = [
+        "athletics", "brawl", "initiative", "insight", "integrity", "perception", "persuasion", "presence", "send",
+        "acrobatics", "clash", "deception", "evasion", "marksman", "navigation", "perform", "subterfuge", "survival",
+        "academics", "appraisal", "craft", "etiquette", "investigation", "lore", "medicine", "science", "technology"
+    ];
 
     function query(name, options) {
         let values = options
             .map(o => o + ", @{" + o + "}+@{" + o + "_bonus}")
             .join("|")
+        values = "none, 0|" + values; 
         return "?{" + name + "|" + values + "}";
     }
 
     on('clicked:skill_check', (info) => {
-        startRoll("&{template:test} {{name=SkillCheck}} {{roll1=[[(" + query("Attribute", attributes) + "+" + query("Expertise", expertises) + ")d10]]}}", (results) => {
+        roll = `[[(${query("Attribute", attributes)} + ${query("Expertise", expertises)} + ${query("Skill", skills)})d10>?{Difficulty?|7}f1!]]`;
+        startRoll("&{template:test} {{name=Skill Check}} {{roll1=" + roll + "}}", (results) => {
             const total = results.results.roll1.result
-            const computed = total % 4;
-
-            console.log(results);
+            const numberOfTens = results.results.roll1.dice.filter(i => i == 10).length;
 
             finishRoll(
                 results.rollId,
                 {
-                    roll1: computed
+                    roll1: total + numberOfTens
+                }
+            );
+        });
+    });
+
+    on('clicked:dot_roll', (info) => {
+        roll = "[[?{Num Dice?|1}d10>?{Difficulty?|7}f1!]]";
+        startRoll("&{template:test} {{name=Dot Roll}} {{roll1=" + roll + "}}", (results) => {
+            const total = results.results.roll1.result
+            const numberOfTens = results.results.roll1.dice.filter(i => i == 10).length;
+
+            finishRoll(
+                results.rollId,
+                {
+                    roll1: total + numberOfTens
                 }
             );
         });
