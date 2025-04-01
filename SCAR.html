@@ -749,7 +749,7 @@
         <div id="active-stat-changes" class="section">
             <table>
                 <tr>
-                    <th class="crimson large" colspan="4">Active Stat Changes</th>
+                    <th class="crimson large" colspan="4">Active Stat Changes <button type="action" name="act_reset_stat_changes">Reset</button></th>
                 </tr>
                 <tr>
                     <th class="gray">Phys. Damage</th>
@@ -864,7 +864,7 @@
     on('clicked:accuracy_move_roll', (info) => {
         physSpecRoll = "?{Phys Or Spec?|Physical,@{body}+@{body_bonus}[Body]|Special,@{mind}+@{mind_bonus}[Mind]}";
         rangeRoll = "?{Range?|Melee Move,@{brawl}+@{brawl_bonus}[Brawl]|Ranged Move,@{send}+@{send_bonus}[Send]|Melee Weapon,@{clash}+@{clash_bonus}[Clash]|Ranged Weapon,@{marksman}+@{marksman_bonus}[Marksman]}";
-        let pool = `${physSpecRoll} + ${query("Expertise", expertises)} + ${rangeRoll} + @{accuracy_stage}[Active Accuracy] +  @{passive_accuracy_stage}[Passive Accuracy] + ?{Move Accuracy|0}[Move Accuracy]`;
+        let pool = `${physSpecRoll} + ${max(expertises)} + ${rangeRoll} + @{accuracy_stage} +  @{passive_accuracy_stage} + ?{Move Accuracy|0}`;
         
         dot_roll(pool, "Move Accuracy Roll");
     });
@@ -902,24 +902,34 @@
     });
 
     on('clicked:evasion_move_roll', (info) => {
-        physSpecRoll = "?{Phys Or Spec?|Physical,@{body}+@{body_bonus}|Special,@{mind}+@{mind_bonus}}";
-        let pool = `round((${physSpecRoll} + ${max(expertises)} + @{evasion} + @{evasion_bonus})/2) + @{evasion_stage} + @{passive_evasion_stage}`;
+        let pool = "?{Phys Or Spec?|Physical,@{physical_evasion}|Special,@{special_evasion}}";
         
         dot_roll(pool, "Move Evasion Roll");
     });
 
     on('clicked:integrity_roll', (info) => {
-        physSpecRoll = "?{Phys Or Spec?|Physical,@{body}+@{body_bonus}|Special,@{mind}+@{mind_bonus}}";
-        integrityRoll = "?{Phys Or Spec?|Physical,@{phys_integrity_stage}+@{passive_phys_integrity_stage}|Special,@{spec_integrity_stage}+@{passive_spec_integrity_stage}}";
-        let pool = `round((${physSpecRoll} + ${max(expertises)} + @{integrity} + @{integrity_bonus})/2) + ${integrityRoll}`;
+        let pool = "?{Phys Or Spec?|Physical,@{physical_integrity}|Special,@{special_integrity}}";
         
         dot_roll(pool, "Integrity Roll");
     });
 
     on('clicked:evasion_effect_roll', (info) => {
-        let pool = `round((@{soul} + @{soul_bonus} + ${max(expertises)} + @{integrity} + @{integrity_bonus})/2) + @{soul_save_stage} + @{passive_soul_save_stage}`;
-        
-        dot_roll(pool, "Soul Save");
+        dot_roll("@{soul_save}", "Soul Save");
+    });
+
+    on('clicked:reset_stat_changes', (info) => {
+        setAttrs({
+            "phys_damage_stage": 0,
+            "crit_chance_stage": 0,
+            "spec_damage_stage": 0,
+            "accuracy_stage": 0,
+            "phys_integrity_stage": 0,
+            "evasion_stage": 0,
+            "spec_integrity_stage": 0,
+            "initiative_stage": 0,
+            "soul_save_stage": 0,
+            "speed_stage": 0
+        })
     });
 
     // Max HP calculation
@@ -937,8 +947,11 @@
 
     // Evasion and Integrity calculations
     const evasionIntegrityStats = ['body', 'mind', 'soul', ...expertises, 'evasion', 'integrity'].flatMap(stat => [stat, `${stat}_bonus`]);
-    on(evasionIntegrityStats.map(stat => `change:${stat}`).join(' '), () => {
-        getAttrs(evasionIntegrityStats, values => {
+    const integrityStageStats = ['phys_integrity_stage', 'spec_integrity_stage', 'passive_phys_integrity_stage', 'passive_spec_integrity_stage'];
+    const allRelatedStats = [...evasionIntegrityStats, ...integrityStageStats, 'evasion_stage', 'passive_evasion_stage', 'soul_save_stage', 'passive_soul_save_stage'];
+    
+    on(allRelatedStats.map(stat => `change:${stat}`).join(' '), () => {
+        getAttrs(allRelatedStats, values => {
             var body = parseInt(values.body);
             var mind = parseInt(values.mind);
             var soul = parseInt(values.soul);
@@ -946,12 +959,17 @@
             var evasion = parseInt(values.evasion);
             var integrity = parseInt(values.integrity);
 
+            var physIntegrityBuffs = parseInt(values['phys_integrity_stage']) + parseInt(values['passive_phys_integrity_stage']);
+            var specIntegrityBuffs = parseInt(values['spec_integrity_stage']) + parseInt(values['passive_spec_integrity_stage']);
+            var evasionBuffs = parseInt(values['evasion_stage']) + parseInt(values['passive_evasion_stage']);
+            var soulSaveBuffs = parseInt(values['soul_save_stage']) + parseInt(values['passive_soul_save_stage']);
+
             setAttrs({
-                "physical_evasion": Math.round((body + expertise + evasion) / 2),
-                "physical_integrity": Math.round((body + expertise + integrity) / 2),
-                "special_evasion": Math.round((mind + expertise + evasion) / 2),
-                "special_integrity": Math.round((mind + expertise + integrity) / 2),
-                "soul_save": Math.round((soul + expertise + integrity) / 2)
+                "physical_evasion": Math.round((body + expertise + evasion) / 2) + evasionBuffs,
+                "physical_integrity": Math.round((body + expertise + integrity) / 2) + physIntegrityBuffs,
+                "special_evasion": Math.round((mind + expertise + evasion) / 2) + evasionBuffs,
+                "special_integrity": Math.round((mind + expertise + integrity) / 2) + specIntegrityBuffs,
+                "soul_save": Math.round((soul + expertise + integrity) / 2) + soulSaveBuffs
             })
         });
     });
