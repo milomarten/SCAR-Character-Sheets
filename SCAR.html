@@ -1,3 +1,62 @@
+<div class="grid grid-2">
+    <div id="char_info_1" class="section">
+        <table>
+            <tr>
+                <th class="crimson" scope="row">Name:</th>
+                <td class="white">
+                    <input type="text" name="attr_name"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="crimson" scope="row">Player:</th>
+                <td class="white">
+                    <input type="text" name="attr_player"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="crimson" scope="row">World:</th>
+                <td class="white">
+                    <input type="text" name="attr_world"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="crimson" scope="row">Species:</th>
+                <td class="white">
+                    <input type="text" name="attr_species"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="char_info_2" class="section">
+        <table>
+            <tr>
+                <th class="crimson" scope="row">Gender:</th>
+                <td class="white">
+                    <input type="text" name="attr_gender"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="crimson" scope="row">Age:</th>
+                <td class="white">
+                    <input type="number" name="attr_age" min="1"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="crimson" scope="row">Weight:</th>
+                <td class="white">
+                    <input type="text" name="attr_weight"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="crimson" scope="row">Height:</th>
+                <td class="white">
+                    <input type="text" name="attr_height"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
 <input type="hidden" class="sheet-tabstoggle" name="attr_sheetTab" value="basic" />
 <div>
     <button type="action" name="act_tab_basic" class="sheet-button0">Basic</button>
@@ -5,64 +64,6 @@
 </div>
 
 <div class="basic">
-    <div class="grid grid-2">
-        <div id="char_info_1" class="section">
-            <table>
-                <tr>
-                    <th class="crimson" scope="row">Name:</th>
-                    <td class="white">
-                        <input type="text" name="attr_name"/>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="crimson" scope="row">Player:</th>
-                    <td class="white">
-                        <input type="text" name="attr_player"/>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="crimson" scope="row">World:</th>
-                    <td class="white">
-                        <input type="text" name="attr_world"/>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="crimson" scope="row">Species:</th>
-                    <td class="white">
-                        <input type="text" name="attr_species"/>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="char_info_2" class="section">
-            <table>
-                <tr>
-                    <th class="crimson" scope="row">Gender:</th>
-                    <td class="white">
-                        <input type="text" name="attr_gender"/>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="crimson" scope="row">Age:</th>
-                    <td class="white">
-                        <input type="number" name="attr_age" min="1"/>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="crimson" scope="row">Weight:</th>
-                    <td class="white">
-                        <input type="text" name="attr_weight"/>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="crimson" scope="row">Height:</th>
-                    <td class="white">
-                        <input type="text" name="attr_height"/>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
     <div class="grid grid-2">
         <div id="stats" class="section">
             <table>
@@ -695,6 +696,87 @@
             </table>
         </div>
     </div>
+    <button type="action" name="act_accuracy_move_roll">Roll Accuracy (for attacks)</button>
+    <button type="action" name="act_evasion_move_roll">Roll Evasion</button>
+    <button type="action" name="act_power_roll">Roll Power</button>
+    <button type="action" name="act_accuracy_effect_roll">Roll Accuracy (for effects)</button>
+    <button type="action" name="act_evasion_effect_roll">Roll Soul Save</button>
+    <div class="grid grid-2">
+        <div id="passive-stat-changes" class="section">
+            <table>
+                <tr>
+                    <th class="crimson large" colspan="4">Passive Stat Changes</th>
+                </tr>
+                <tr>
+                    <th class="gray">Phys. Damage</th>
+                    <td><input type="number" name="attr_passive_phys_damage_stage" value="0"/></td>
+                    <th class="gray">Crit Chance</th>
+                    <td><input type="number" name="attr_passive_crit_chance_stage" value="0"/></td>
+                </tr>
+                <tr>
+                    <th class="gray">Spec. Damage</th>
+                    <td><input type="number" name="attr_passive_spec_damage_stage" value="0"/></td>
+                    <th class="gray">Accuracy</th>
+                    <td><input type="number" name="attr_passive_accuracy_stage" value="0"/></td>
+                </tr>
+                <tr>
+                    <th class="gray">Phys. Integrity</th>
+                    <td><input type="number" name="attr_passive_phys_integrity_stage" value="0"/></td>
+                    <th class="gray">Evasion</th>
+                    <td><input type="number" name="attr_passive_evasion_stage" value="0"/></td>
+                </tr>
+                <tr>
+                    <th class="gray">Spec. Integrity</th>
+                    <td><input type="number" name="attr_passive_spec_integrity_stage" value="0"/></td>
+                    <th class="gray">Initiative</th>
+                    <td><input type="number" name="attr_passive_initiative_stage" value="0"/></td>
+                </tr>
+                <tr>
+                    <th class="gray">Soul Save</th>
+                    <td><input type="number" name="attr_passive_soul_save_stage" value="0"/></td>
+                    <th class="gray">Speed</th>
+                    <td><input type="number" name="attr_passive_speed_stage" value="0"/></td>
+                </tr>
+            </table>
+        </div>
+        <div id="active-stat-changes" class="section">
+            <table>
+                <tr>
+                    <th class="crimson large" colspan="4">Active Stat Changes</th>
+                </tr>
+                <tr>
+                    <th class="gray">Phys. Damage</th>
+                    <td><input type="number" name="attr_phys_damage_stage" value="0"/></td>
+                    <th class="gray">Crit Chance</th>
+                    <td><input type="number" name="attr_crit_chance_stage" value="0"/></td>
+                </tr>
+                <tr>
+                    <th class="gray">Spec. Damage</th>
+                    <td><input type="number" name="attr_spec_damage_stage" value="0"/></td>
+                    <th class="gray">Accuracy</th>
+                    <td><input type="number" name="attr_accuracy_stage" value="0"/></td>
+                </tr>
+                <tr>
+                    <th class="gray">Phys. Integrity</th>
+                    <td><input type="number" name="attr_phys_integrity_stage" value="0"/></td>
+                    <th class="gray">Evasion</th>
+                    <td><input type="number" name="attr_evasion_stage" value="0"/></td>
+                </tr>
+                <tr>
+                    <th class="gray">Spec. Integrity</th>
+                    <td><input type="number" name="attr_spec_integrity_stage" value="0"/></td>
+                    <th class="gray">Initiative</th>
+                    <td><input type="number" name="attr_initiative_stage" value="0"/></td>
+                </tr>
+                <tr>
+                    <th class="gray">Soul Save</th>
+                    <td><input type="number" name="attr_soul_save_stage" value="0"/></td>
+                    <th class="gray">Speed</th>
+                    <td><input type="number" name="attr_speed_stage" value="0"/></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 
 <rolltemplate class="sheet-rolltemplate-test">
@@ -702,6 +784,17 @@
         <h1>{{name}}</h1>
         <div class="sheet-results">
             <h4>Result = {{computed::roll1}}</h4>
+        </div>
+    </div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-power">
+    <div class="sheet-template-container">
+        <h1>{{name}}</h1>
+        <div class="sheet-results">
+            <h4>Final Power = {{computed::roll1}}</h4>
+            <h4>Chip Damage? = {{computed::chip}}</h4>
+            Don't forget to add or subtract successes based on your relevant Damage Stats! I can't do that sorry I'm dumb.
         </div>
     </div>
 </rolltemplate>
@@ -717,10 +810,18 @@
 
     function query(name, options) {
         let values = options
-            .map(o => o + ", @{" + o + "}+@{" + o + "_bonus}")
+            .map(o => o + ", @{" + o + "}+@{" + o + "_bonus}[" + o + "]")
             .join("|")
         values = values + "|none, 0"; 
         return "?{" + name + "|" + values + "}";
+    }
+
+    function max(options) {
+        let values = options
+            .map(o => "@{" + o + "}+@{" + o + "_bonus}[" + o + "]")
+            .join(",")
+            
+        return "{" + values + "}kh1"
     }
 
     function max_stat(options, results) {
@@ -729,11 +830,16 @@
         return Math.max(...totals);
     }
 
-    on('clicked:skill_check', (info) => {
-        roll = `[[(${query("Attribute", attributes)} + ${query("Expertise", expertises)} + ${query("Skill", skills)} + ?{Pool Bonus|0})d10>?{Difficulty?|7}f1!]]`;
-        startRoll("&{template:test} {{name=Skill Check}} {{roll1=" + roll + "}}", (results) => {
+    function dot_roll(expression, name, promptExplode) {
+        if (promptExplode) {
+            explodeExpr = "!>?{Explode At?|10}"
+        } else {
+            explodeExpr = "!";
+        }
+        roll = `[[[[${expression}]]d10>?{Difficulty?|7}f1${explodeExpr}]]`;
+        startRoll("&{template:test} {{name=" + name + "}} {{roll1=" + roll + "}}", (results) => {
             const total = results.results.roll1.result
-            const numberOfTens = results.results.roll1.dice.filter(i => i == 10).length;
+            const numberOfTens = results.results.roll1.dice.filter(i => i >= explodeNumber).length;
 
             finishRoll(
                 results.rollId,
@@ -742,18 +848,65 @@
                 }
             );
         });
+    }
+
+    on('clicked:skill_check', (info) => {
+        pool = `${query("Attribute", attributes)} + ${query("Expertise", expertises)} + ${query("Skill", skills)} + ?{Pool Bonus|0}`;
+        dot_roll(pool, "Skill Check");
     });
 
     on('clicked:dot_roll', (info) => {
-        roll = "[[?{Num Dice?|1}d10>?{Difficulty?|7}f1!]]";
-        startRoll("&{template:test} {{name=Dot Roll}} {{roll1=" + roll + "}}", (results) => {
+        dot_roll("?{Num Dice?|1}", "Dot Roll");
+    });
+
+    on('clicked:accuracy_move_roll', (info) => {
+        physSpecRoll = "?{Phys Or Spec?|Physical,@{body}+@{body_bonus}[Body]|Special,@{mind}+@{mind_bonus}[Mind]}";
+        rangeRoll = "?{Range?|Melee Move,@{brawl}+@{brawl_bonus}[Brawl]|Ranged Move,@{send}+@{send_bonus}[Send]|Melee Weapon,@{clash}+@{clash_bonus}[Clash]|Ranged Weapon,@{marksman}+@{marksman_bonus}[Marksman]}";
+        let pool = `${physSpecRoll} + ${query("Expertise", expertises)} + ${rangeRoll} + @{accuracy_stage}[Active Accuracy] +  @{passive_accuracy_stage}[Passive Accuracy] + ?{Move Accuracy|0}[Move Accuracy]`;
+        
+        dot_roll(pool, "Move Accuracy Roll");
+    });
+
+    on('clicked:evasion_move_roll', (info) => {
+        physSpecRoll = "?{Phys Or Spec?|Physical,@{body}+@{body_bonus}|Special,@{mind}+@{mind_bonus}}";
+        let pool = `round((${physSpecRoll} + ${max(expertises)} + @{evasion} + @{evasion_bonus})/2) + @{evasion_stage} + @{passive_evasion_stage}`;
+        
+        dot_roll(pool, "Move Evasion Roll");
+    });
+
+    on('clicked:accuracy_effect_roll', (info) => {
+        let pool = `@{soul} + @{soul_bonus} + ${max(expertises)} + ${query("Skill", ["deception", "etiquette", "persuasion", "presence"])}`;
+        
+        dot_roll(pool, "Effect Accuracy Roll");
+    });
+
+    on('clicked:evasion_effect_roll', (info) => {
+        let pool = `round((@{soul} + @{soul_bonus} + ${max(expertises)} + @{integrity} + @{integrity_bonus})/2) + @{soul_save_stage} + @{passive_soul_save_stage}`;
+        
+        dot_roll(pool, "Soul Save");
+    });
+
+    on('clicked:power_roll', (info) => {
+        physSpecRoll = "?{Phys Or Spec?|Physical,@{body}+@{body_bonus}[Body]|Special,@{mind}+@{mind_bonus}[Mind]}";
+        rangeRoll = "?{Range?|Melee Move,@{brawl}+@{brawl_bonus}[Brawl]|Ranged Move,@{send}+@{send_bonus}[Send]|Melee Weapon,@{clash}+@{clash_bonus}[Clash]|Ranged Weapon,@{marksman}+@{marksman_bonus}[Marksman]}";
+        basePowerRoll = "?{Base Power?|1}"
+        let expression = `${physSpecRoll} + ${rangeRoll} + ${basePowerRoll}`;
+        
+        roll = `[[[[${expression}]]d10>7f1!]]`;
+        startRoll("&{template:power} {{name=Power Roll}} {{roll1=" + roll + "}} {{chip=[[1d20]]}}", (results) => {
             const total = results.results.roll1.result
-            const numberOfTens = results.results.roll1.dice.filter(i => i == 10).length;
+            const numberOfTens = results.results.roll1.dice.filter(i => i >= 10).length;
+
+            const left = results.results.roll1.expression.indexOf('>');
+            const right = results.results.roll1.expression.indexOf('f');
+            const threshold = parseInt(results.results.roll1.expression.substring(left + 1, right));
+            const chip = results.results.roll1.dice.filter(i => i >= threshold).length > 0;
 
             finishRoll(
                 results.rollId,
                 {
-                    roll1: total + numberOfTens
+                    roll1: total + numberOfTens,
+                    chip: chip ? "YES" : "NO"
                 }
             );
         });
