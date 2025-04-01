@@ -696,11 +696,18 @@
             </table>
         </div>
     </div>
-    <button type="action" name="act_accuracy_move_roll">Roll Accuracy (for attacks)</button>
-    <button type="action" name="act_evasion_move_roll">Roll Evasion</button>
-    <button type="action" name="act_power_roll">Roll Power</button>
-    <button type="action" name="act_accuracy_effect_roll">Roll Accuracy (for effects)</button>
-    <button type="action" name="act_evasion_effect_roll">Roll Soul Save</button>
+    Offense:
+    <div class="grid grid-3">
+        <button type="action" name="act_accuracy_move_roll">Roll Accuracy (for attacks)</button>
+        <button type="action" name="act_accuracy_effect_roll">Roll Accuracy (for effects)</button>
+        <button type="action" name="act_power_roll">Roll Power</button>
+    </div>
+    Defense:
+    <div class="grid grid-3">
+        <button type="action" name="act_evasion_move_roll">Roll Evasion</button>
+        <button type="action" name="act_evasion_effect_roll">Roll Soul Save</button>
+        <button type="action" name="act_integrity_roll">Roll Integrity</button>
+    </div>
     <div class="grid grid-2">
         <div id="passive-stat-changes" class="section">
             <table>
@@ -831,15 +838,10 @@
     }
 
     function dot_roll(expression, name, promptExplode) {
-        if (promptExplode) {
-            explodeExpr = "!>?{Explode At?|10}"
-        } else {
-            explodeExpr = "!";
-        }
-        roll = `[[[[${expression}]]d10>?{Difficulty?|7}f1${explodeExpr}]]`;
+        roll = `[[[[${expression}]]d10>?{Difficulty?|7}f1!]]`;
         startRoll("&{template:test} {{name=" + name + "}} {{roll1=" + roll + "}}", (results) => {
             const total = results.results.roll1.result
-            const numberOfTens = results.results.roll1.dice.filter(i => i >= explodeNumber).length;
+            const numberOfTens = results.results.roll1.dice.filter(i => i >= 10).length;
 
             finishRoll(
                 results.rollId,
@@ -867,25 +869,6 @@
         dot_roll(pool, "Move Accuracy Roll");
     });
 
-    on('clicked:evasion_move_roll', (info) => {
-        physSpecRoll = "?{Phys Or Spec?|Physical,@{body}+@{body_bonus}|Special,@{mind}+@{mind_bonus}}";
-        let pool = `round((${physSpecRoll} + ${max(expertises)} + @{evasion} + @{evasion_bonus})/2) + @{evasion_stage} + @{passive_evasion_stage}`;
-        
-        dot_roll(pool, "Move Evasion Roll");
-    });
-
-    on('clicked:accuracy_effect_roll', (info) => {
-        let pool = `@{soul} + @{soul_bonus} + ${max(expertises)} + ${query("Skill", ["deception", "etiquette", "persuasion", "presence"])}`;
-        
-        dot_roll(pool, "Effect Accuracy Roll");
-    });
-
-    on('clicked:evasion_effect_roll', (info) => {
-        let pool = `round((@{soul} + @{soul_bonus} + ${max(expertises)} + @{integrity} + @{integrity_bonus})/2) + @{soul_save_stage} + @{passive_soul_save_stage}`;
-        
-        dot_roll(pool, "Soul Save");
-    });
-
     on('clicked:power_roll', (info) => {
         physSpecRoll = "?{Phys Or Spec?|Physical,@{body}+@{body_bonus}[Body]|Special,@{mind}+@{mind_bonus}[Mind]}";
         rangeRoll = "?{Range?|Melee Move,@{brawl}+@{brawl_bonus}[Brawl]|Ranged Move,@{send}+@{send_bonus}[Send]|Melee Weapon,@{clash}+@{clash_bonus}[Clash]|Ranged Weapon,@{marksman}+@{marksman_bonus}[Marksman]}";
@@ -910,6 +893,33 @@
                 }
             );
         });
+    });
+
+    on('clicked:accuracy_effect_roll', (info) => {
+        let pool = `@{soul} + @{soul_bonus} + ${max(expertises)} + ${query("Skill", ["deception", "etiquette", "persuasion", "presence"])}`;
+        
+        dot_roll(pool, "Effect Accuracy Roll");
+    });
+
+    on('clicked:evasion_move_roll', (info) => {
+        physSpecRoll = "?{Phys Or Spec?|Physical,@{body}+@{body_bonus}|Special,@{mind}+@{mind_bonus}}";
+        let pool = `round((${physSpecRoll} + ${max(expertises)} + @{evasion} + @{evasion_bonus})/2) + @{evasion_stage} + @{passive_evasion_stage}`;
+        
+        dot_roll(pool, "Move Evasion Roll");
+    });
+
+    on('clicked:integrity_roll', (info) => {
+        physSpecRoll = "?{Phys Or Spec?|Physical,@{body}+@{body_bonus}|Special,@{mind}+@{mind_bonus}}";
+        integrityRoll = "?{Phys Or Spec?|Physical,@{phys_integrity_stage}+@{passive_phys_integrity_stage}|Special,@{spec_integrity_stage}+@{passive_spec_integrity_stage}}";
+        let pool = `round((${physSpecRoll} + ${max(expertises)} + @{integrity} + @{integrity_bonus})/2) + ${integrityRoll}`;
+        
+        dot_roll(pool, "Integrity Roll");
+    });
+
+    on('clicked:evasion_effect_roll', (info) => {
+        let pool = `round((@{soul} + @{soul_bonus} + ${max(expertises)} + @{integrity} + @{integrity_bonus})/2) + @{soul_save_stage} + @{passive_soul_save_stage}`;
+        
+        dot_roll(pool, "Soul Save");
     });
 
     // Max HP calculation
