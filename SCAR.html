@@ -696,17 +696,10 @@
             </table>
         </div>
     </div>
-    Offense:
     <div class="grid grid-3">
-        <button type="action" name="act_accuracy_move_roll">Roll Accuracy (for attacks)</button>
-        <button type="action" name="act_accuracy_effect_roll">Roll Accuracy (for effects)</button>
+        <button type="action" name="act_accuracy_move_roll">Roll Move Accuracy</button>
+        <button type="action" name="act_accuracy_effect_roll">Roll Effect Accuracy</button>
         <button type="action" name="act_power_roll">Roll Power</button>
-    </div>
-    Defense:
-    <div class="grid grid-3">
-        <button type="action" name="act_evasion_move_roll">Roll Evasion</button>
-        <button type="action" name="act_evasion_effect_roll">Roll Soul Save</button>
-        <button type="action" name="act_integrity_roll">Roll Integrity</button>
     </div>
     <div class="grid grid-2">
         <div id="passive-stat-changes" class="section">
@@ -716,33 +709,33 @@
                 </tr>
                 <tr>
                     <th class="gray">Phys. Damage</th>
-                    <td><input type="number" name="attr_passive_phys_damage_stage" value="0"/></td>
+                    <td><input type="number" name="attr_passive_phys_damage_stage" value="0" min="-6" max="6"/></td>
                     <th class="gray">Crit Chance</th>
-                    <td><input type="number" name="attr_passive_crit_chance_stage" value="0"/></td>
+                    <td><input type="number" name="attr_passive_crit_chance_stage" value="0" min="-3" max="3"/></td>
                 </tr>
                 <tr>
                     <th class="gray">Spec. Damage</th>
-                    <td><input type="number" name="attr_passive_spec_damage_stage" value="0"/></td>
+                    <td><input type="number" name="attr_passive_spec_damage_stage" value="0" min="-6" max="6"/></td>
                     <th class="gray">Accuracy</th>
-                    <td><input type="number" name="attr_passive_accuracy_stage" value="0"/></td>
+                    <td><input type="number" name="attr_passive_accuracy_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
                     <th class="gray">Phys. Integrity</th>
-                    <td><input type="number" name="attr_passive_phys_integrity_stage" value="0"/></td>
+                    <td><input type="number" name="attr_passive_phys_integrity_stage" value="0" min="-6" max="6"/></td>
                     <th class="gray">Evasion</th>
-                    <td><input type="number" name="attr_passive_evasion_stage" value="0"/></td>
+                    <td><input type="number" name="attr_passive_evasion_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
                     <th class="gray">Spec. Integrity</th>
-                    <td><input type="number" name="attr_passive_spec_integrity_stage" value="0"/></td>
+                    <td><input type="number" name="attr_passive_spec_integrity_stage" value="0" min="-6" max="6"/></td>
                     <th class="gray">Initiative</th>
-                    <td><input type="number" name="attr_passive_initiative_stage" value="0"/></td>
+                    <td><input type="number" name="attr_passive_initiative_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
                     <th class="gray">Soul Save</th>
-                    <td><input type="number" name="attr_passive_soul_save_stage" value="0"/></td>
+                    <td><input type="number" name="attr_passive_soul_save_stage" value="0" min="-6" max="6"/></td>
                     <th class="gray">Speed</th>
-                    <td><input type="number" name="attr_passive_speed_stage" value="0"/></td>
+                    <td><input type="number" name="attr_passive_speed_stage" value="0" min="-6" max="6"/></td>
                 </tr>
             </table>
         </div>
@@ -753,56 +746,52 @@
                 </tr>
                 <tr>
                     <th class="gray">Phys. Damage</th>
-                    <td><input type="number" name="attr_phys_damage_stage" value="0"/></td>
+                    <td><input type="number" name="attr_phys_damage_stage" value="0" min="-6" max="6"/></td>
                     <th class="gray">Crit Chance</th>
-                    <td><input type="number" name="attr_crit_chance_stage" value="0"/></td>
+                    <td><input type="number" name="attr_crit_chance_stage" value="0" min="-3" max="3"/></td>
                 </tr>
                 <tr>
                     <th class="gray">Spec. Damage</th>
-                    <td><input type="number" name="attr_spec_damage_stage" value="0"/></td>
+                    <td><input type="number" name="attr_spec_damage_stage" value="0" min="-6" max="6"/></td>
                     <th class="gray">Accuracy</th>
-                    <td><input type="number" name="attr_accuracy_stage" value="0"/></td>
+                    <td><input type="number" name="attr_accuracy_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
                     <th class="gray">Phys. Integrity</th>
-                    <td><input type="number" name="attr_phys_integrity_stage" value="0"/></td>
+                    <td><input type="number" name="attr_phys_integrity_stage" value="0" min="-6" max="6"/></td>
                     <th class="gray">Evasion</th>
-                    <td><input type="number" name="attr_evasion_stage" value="0"/></td>
+                    <td><input type="number" name="attr_evasion_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
                     <th class="gray">Spec. Integrity</th>
-                    <td><input type="number" name="attr_spec_integrity_stage" value="0"/></td>
+                    <td><input type="number" name="attr_spec_integrity_stage" value="0" min="-6" max="6"/></td>
                     <th class="gray">Initiative</th>
-                    <td><input type="number" name="attr_initiative_stage" value="0"/></td>
+                    <td><input type="number" name="attr_initiative_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
                     <th class="gray">Soul Save</th>
-                    <td><input type="number" name="attr_soul_save_stage" value="0"/></td>
+                    <td><input type="number" name="attr_soul_save_stage" value="0" min="-6" max="6"/></td>
                     <th class="gray">Speed</th>
-                    <td><input type="number" name="attr_speed_stage" value="0"/></td>
+                    <td><input type="number" name="attr_speed_stage" value="0" min="-6" max="6"/></td>
                 </tr>
             </table>
         </div>
     </div>
 </div>
 
-<rolltemplate class="sheet-rolltemplate-test">
+<rolltemplate class="sheet-rolltemplate-pool_roll">
     <div class="sheet-template-container">
-        <h1>{{name}}</h1>
-        <div class="sheet-results">
-            <h4>Result = {{computed::roll1}}</h4>
-        </div>
-    </div>
-</rolltemplate>
-
-<rolltemplate class="sheet-rolltemplate-power">
-    <div class="sheet-template-container">
-        <h1>{{name}}</h1>
-        <div class="sheet-results">
-            <h4>Final Power = {{computed::roll1}}</h4>
-            <h4>Chip Damage? = {{computed::chip}}</h4>
-            Don't forget to add or subtract successes based on your relevant Damage Stats! I can't do that sorry I'm dumb.
-        </div>
+        <table>
+            <tr><th class="crimson large" colspan="2">{{name}}</th></tr>
+            <tr>
+                <th class="gray">Dice Pool</th>
+                <td>{{pool}}</td>
+            </tr>
+            <tr>
+                <th class="gray">Dot Dice Roll</th>
+                <td>{{computed::roll}}</td>
+            </tr>
+        </table>
     </div>
 </rolltemplate>
 
@@ -815,20 +804,24 @@
         "academics", "appraisal", "craft", "etiquette", "investigation", "lore", "medicine", "science", "technology"
     ];
 
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.substring(1);
+    }
+
     function query(name, options) {
         let values = options
-            .map(o => o + ", @{" + o + "}+@{" + o + "_bonus}[" + o + "]")
+            .map(o => `${capitalize(o)}, @{${o}}[Base ${capitalize(o)}] + @{${o}_bonus}[Bonus ${capitalize(o)}]`)
             .join("|")
-        values = values + "|none, 0"; 
+        values = values + "|None, 0"; 
         return "?{" + name + "|" + values + "}";
     }
 
     function max(options) {
         let values = options
-            .map(o => "@{" + o + "}+@{" + o + "_bonus}[" + o + "]")
+            .map(o => "@{" + o + "}+@{" + o + "_bonus}[" + capitalize(o) + "]")
             .join(",")
             
-        return "{" + values + "}kh1"
+        return "[[{" + values + "}kh1]][Highest Expertise]"
     }
 
     function max_stat(options, results) {
@@ -837,16 +830,17 @@
         return Math.max(...totals);
     }
 
-    function dot_roll(expression, name, promptExplode) {
-        roll = `[[[[${expression}]]d10>?{Difficulty?|7}f1!]]`;
-        startRoll("&{template:test} {{name=" + name + "}} {{roll1=" + roll + "}}", (results) => {
-            const total = results.results.roll1.result
-            const numberOfTens = results.results.roll1.dice.filter(i => i >= 10).length;
+    function dot_roll(expression, name, difficultyMod) {
+        difficultyPart = difficultyMod ? `[[?{Difficulty?|7} ${difficultyMod}]]` : "?{Difficulty?|7}"
+        roll = `[[[[${expression}]]d10>${difficultyPart}f1!]]`;
+        startRoll("&{template:pool_roll} {{name=" + name + "}} {{pool=[[" + expression + "]]}} {{roll=" + roll + "}}", (results) => {
+            const total = results.results.roll.result
+            const numberOfTens = results.results.roll.dice.filter(i => i >= 10).length;
 
             finishRoll(
                 results.rollId,
                 {
-                    roll1: total + numberOfTens
+                    roll: total + numberOfTens
                 }
             );
         });
@@ -862,59 +856,40 @@
     });
 
     on('clicked:accuracy_move_roll', (info) => {
-        physSpecRoll = "?{Phys Or Spec?|Physical,@{body}+@{body_bonus}[Body]|Special,@{mind}+@{mind_bonus}[Mind]}";
-        rangeRoll = "?{Range?|Melee Move,@{brawl}+@{brawl_bonus}[Brawl]|Ranged Move,@{send}+@{send_bonus}[Send]|Melee Weapon,@{clash}+@{clash_bonus}[Clash]|Ranged Weapon,@{marksman}+@{marksman_bonus}[Marksman]}";
-        let pool = `${physSpecRoll} + ${max(expertises)} + ${rangeRoll} + @{accuracy_stage} +  @{passive_accuracy_stage} + ?{Move Accuracy|0}`;
+        physSpecRoll = "?{Phys Or Spec?|Physical,@{body}[Base Body]+@{body_bonus}[Body Bonus]|Special,@{mind}[Base Mind]+@{mind_bonus}[Mind Bonus]}";
+        rangeRoll = "?{Range?|Melee Move,@{brawl}[Base Brawl]+@{brawl_bonus}[Bonus Brawl]|Ranged Move,@{send}[Base Send]+@{send_bonus}[Send Bonus]|Melee Weapon,@{clash}[Base Clash]+@{clash_bonus}[Clash Bonus]|Ranged Weapon,@{marksman}[Base Marksman]+@{marksman_bonus}[Marksman Bonus]}";
+        let pool = `${physSpecRoll} + ${max(expertises)} + ${rangeRoll} + @{accuracy_stage}[Accuracy Stages] +  @{passive_accuracy_stage}[Passive Accuracy Stages] + ?{Move Accuracy|0}[Move Accuracy]`;
         
         dot_roll(pool, "Move Accuracy Roll");
     });
 
     on('clicked:power_roll', (info) => {
-        physSpecRoll = "?{Phys Or Spec?|Physical,@{body}+@{body_bonus}[Body]|Special,@{mind}+@{mind_bonus}[Mind]}";
-        rangeRoll = "?{Range?|Melee Move,@{brawl}+@{brawl_bonus}[Brawl]|Ranged Move,@{send}+@{send_bonus}[Send]|Melee Weapon,@{clash}+@{clash_bonus}[Clash]|Ranged Weapon,@{marksman}+@{marksman_bonus}[Marksman]}";
-        basePowerRoll = "?{Base Power?|1}"
-        let expression = `${physSpecRoll} + ${rangeRoll} + ${basePowerRoll}`;
-        
-        roll = `[[[[${expression}]]d10>7f1!]]`;
-        startRoll("&{template:power} {{name=Power Roll}} {{roll1=" + roll + "}} {{chip=[[1d20]]}}", (results) => {
-            const total = results.results.roll1.result
-            const numberOfTens = results.results.roll1.dice.filter(i => i >= 10).length;
+        physSpecRoll = "?{Phys Or Spec?|Physical,@{body}[Base Body]+@{body_bonus}[Body Bonus]|Special,@{mind}[Base Mind]+@{mind_bonus}[Mind Bonus]}";
+        rangeRoll = "?{Range?|Melee Move,@{brawl}[Base Brawl]+@{brawl_bonus}[Bonus Brawl]|Ranged Move,@{send}[Base Send]+@{send_bonus}[Send Bonus]|Melee Weapon,@{clash}[Base Clash]+@{clash_bonus}[Clash Bonus]|Ranged Weapon,@{marksman}[Base Marksman]+@{marksman_bonus}[Marksman Bonus]}";
+        basePowerRoll = "?{Base Power?|1}[Base Power]"
+        let expression = `round((${physSpecRoll} + ${rangeRoll} + ${basePowerRoll}) * ?{Crit?|Yes,1.5|No,1})`;
+        let expressionWithCrit = expression;
 
-            const left = results.results.roll1.expression.indexOf('>');
-            const right = results.results.roll1.expression.indexOf('f');
-            const threshold = parseInt(results.results.roll1.expression.substring(left + 1, right));
-            const chip = results.results.roll1.dice.filter(i => i >= threshold).length > 0;
+        let typeAdvantage = "[[?{Difficulty?|7} + ?{Type Effectiveness?|Neutral,0|Super Effective,-1|Double Effective,-2|Resistant, 1|Double Resistant, 2}]]"
+        
+        roll = `[[[[${expressionWithCrit}]]d10>${typeAdvantage}f1!]]`;
+        startRoll("&{template:pool_roll} {{name=Power Roll}} {{pool=[[" + expressionWithCrit + "]]}} {{roll=" + roll + "}}", (results) => {
+            const total = results.results.roll.result
+            const numberOfTens = results.results.roll.dice.filter(i => i >= 10).length;
 
             finishRoll(
                 results.rollId,
                 {
-                    roll1: total + numberOfTens,
-                    chip: chip ? "YES" : "NO"
+                    roll: total + numberOfTens
                 }
             );
         });
     });
 
     on('clicked:accuracy_effect_roll', (info) => {
-        let pool = `@{soul} + @{soul_bonus} + ${max(expertises)} + ${query("Skill", ["deception", "etiquette", "persuasion", "presence"])}`;
+        let pool = `@{soul}[Base Soul] + @{soul_bonus}[Soul Bonus] + ${max(expertises)} + ${query("Skill", ["deception", "etiquette", "persuasion", "presence"])}`;
         
         dot_roll(pool, "Effect Accuracy Roll");
-    });
-
-    on('clicked:evasion_move_roll', (info) => {
-        let pool = "?{Phys Or Spec?|Physical,@{physical_evasion}|Special,@{special_evasion}}";
-        
-        dot_roll(pool, "Move Evasion Roll");
-    });
-
-    on('clicked:integrity_roll', (info) => {
-        let pool = "?{Phys Or Spec?|Physical,@{physical_integrity}|Special,@{special_integrity}}";
-        
-        dot_roll(pool, "Integrity Roll");
-    });
-
-    on('clicked:evasion_effect_roll', (info) => {
-        dot_roll("@{soul_save}", "Soul Save");
     });
 
     on('clicked:reset_stat_changes', (info) => {
