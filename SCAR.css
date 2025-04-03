@@ -56,9 +56,53 @@ th, td, .sheet-rolltemplate-pool_roll th, .sheet-rolltemplate-pool_roll td {
 /* style the active button */
 .charsheet .sheet-tabstoggle[value="basic"] ~ div .sheet-button0 {outline: 2px solid red;}
 .charsheet .sheet-tabstoggle[value="combat"] ~ div .sheet-button1 {outline: 2px solid red;}
+.charsheet .sheet-tabstoggle[value="attacks"] ~ div .sheet-button2 {outline: 2px solid red;}
 
 /* show the selected tab */
 .charsheet .sheet-tabstoggle[value="basic"] ~ div.basic,
-.charsheet .sheet-tabstoggle[value="combat"] ~ div.combat {
+.charsheet .sheet-tabstoggle[value="combat"] ~ div.combat,
+.charsheet .sheet-tabstoggle[value="attacks"] ~ div.attacks {
     display: block;
+}
+
+.repeating-table {
+    display: grid;
+}
+
+.item-table {
+    grid-template-columns: repeat(6, 1fr) 6fr;
+}
+
+.repeating-table > div {
+    padding: 2px 10px;
+    font-size: 10px;
+    font-weight: bold;
+    /* Hack 1 - Collapse Borders */
+    gap: 1px;
+    box-shadow:0 0 0 1px black;
+    /* Hack 2 - Center horizontally and vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.repeating-colspan-2 {
+    grid-column-end: span 2;
+}
+
+.repeating-colspan-5 {
+    grid-column-end: span 5;
+}
+
+.repeating-rowspan-7 {
+    grid-row-end: span 7;
+}
+
+.small-textbox {
+    width: 3.5em;
+}
+
+.middle-textbox {
+    width: 7em;
 }

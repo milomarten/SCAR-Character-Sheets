@@ -61,6 +61,7 @@
 <div>
     <button type="action" name="act_tab_basic" class="sheet-button0">Basic</button>
     <button type="action" name="act_tab_combat" class="sheet-button1">Combat</button>
+    <button type="action" name="act_tab_attacks" class="sheet-button2">Attacks</button>
 </div>
 
 <div class="basic">
@@ -778,6 +779,129 @@
         </div>
     </div>
 </div>
+<div class="attacks">
+    <div class="grid grid-2">
+        <div id="combat_skills" class="section">
+            <table>
+                <tr>
+                    <th class="crimson large" colspan="2" scope="colgroup">Combat Skills</th>
+                    <th class="gray large" scope="col">B</th>
+                </tr>
+                <tr>
+                    <th class="gray" scope="row">Brawl (Melee Move)</th>
+                    <td class="white">
+                        <span name="attr_brawl"></span>
+                    </td>
+                    <td class="gray">
+                        <span name="attr_brawl_bonus"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="gray" scope="row">Clash (Melee Weapon)</th>
+                    <td class="white">
+                        <span name="attr_clash"></span>
+                    </td>
+                    <td class="gray">
+                        <span name="attr_clash_bonus"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="gray" scope="row">Marksman (Ranged Weapon)</th>
+                    <td class="white">
+                        <span name="attr_marksman"></span>
+                    </td>
+                    <td class="gray">
+                        <span name="attr_marksman_bonus"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="gray" scope="row">Send (Ranged Move)</th>
+                    <td class="white">
+                        <span name="attr_send"></span>
+                    </td>
+                    <td class="gray">
+                        <span name="attr_send_bonus"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="exp_caps" class="section">
+            <table>
+                <tr>
+                    <th colspan="6" class="crimson">EXP Caps</th>
+                </tr>
+                <tr>
+                    <th colspan="2" class="gray">Quick Action</th>
+                    <th colspan="2" class="gray">Standard Action</th>
+                    <th colspan="2" class="gray">Full Action</th>
+                </tr>
+                <tr>
+                    <th class="gray">EXP</th>
+                    <th class="gray">Power</th>
+                    <th class="gray">EXP</th>
+                    <th class="gray">Power</th>
+                    <th class="gray">EXP</th>
+                    <th class="gray">Power</th>
+                </tr>
+                <tr>
+                    <td><input type="hidden" name="attr_cap_qa_exp"/><span name="attr_cap_qa_exp"></span></td>
+                    <td><input type="hidden" name="attr_cap_qa_power"/><span name="attr_cap_qa_power"></span></td>
+                    <td><input type="hidden" name="attr_cap_sa_exp"/><span name="attr_cap_sa_exp"></span></td>
+                    <td><input type="hidden" name="attr_cap_sa_power"/><span name="attr_cap_sa_power"></span></td>
+                    <td><input type="hidden" name="attr_cap_fa_exp"/><span name="attr_cap_fa_exp"></span></td>
+                    <td><input type="hidden" name="attr_cap_fa_power"/><span name="attr_cap_fa_power"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <fieldset class="repeating_attacklist">
+        <div class="repeating-table item-table">
+            <!--Row 1-->
+            <div class="crimson">Name</div>
+            <div class="repeating-colspan-5"><input type="text" name="attr_attack_name"></div>
+            <div class="crimson">Extra Effects</div>
+            <!--Row 2-->
+            <div class="crimson">Type</div>
+            <div class="repeating-colspan-5">
+                 <select name="attr_attack_type">
+                    <option value="physical">Physical</option>
+                    <option value="special">Special</option>
+                 </select>
+            </div>
+            <div class="repeating-rowspan-7"><textarea name="attr_attack_freetext"></textarea></div>
+            <!--Row 3-->
+            <div class="crimson">Skill</div>
+            <div class="repeating-colspan-5"><input type="text" name="attr_attack_skill"></div>
+            <!--Row 4-->
+            <div class="crimson">Element</div>
+            <div class="repeating-colspan-5"><input type="text" name="attr_attack_element"></div>
+            <!--Row 5-->
+            <div class="crimson">Accuracy</div>
+            <div><input type="number" name="attr_attack_accuracy"/></div>
+            <div class="crimson">Power</div>
+            <div><input type="number" name="attr_attack_power"/></div>
+            <div class="crimson">Range</div>
+            <div><input class="small-textbox" type="string" name="attr_attack_range"/></div>
+            <!--Row 6-->
+            <div class="crimson">EXP</div>
+            <div class="repeating-colspan-2">
+                <div>
+                    <input type="number" name="attr_attack_exp"/>
+                    /
+                    <input type="number" name="attr_attack_exp_max"/>
+                </div>
+            </div>
+            <div class="crimson">Action</div>
+            <div class="repeating-colspan-2">
+                <select class="middle-textbox" name="attr_attack_action">
+                    <option value="STD">Standard</option>
+                    <option value="QCK">Quick</option>
+                    <option value="FUL">Full</option>
+                </select>
+            </div>
+        </div>
+    </fieldset>
+</div>
 
 <rolltemplate class="sheet-rolltemplate-pool_roll">
     <div class="sheet-template-container">
@@ -927,9 +1051,9 @@
     
     on(allRelatedStats.map(stat => `change:${stat}`).join(' '), () => {
         getAttrs(allRelatedStats, values => {
-            var body = parseInt(values.body);
-            var mind = parseInt(values.mind);
-            var soul = parseInt(values.soul);
+            var body = parseInt(values.body); var bodyBonus = parseInt(values['body_bonus']);
+            var mind = parseInt(values.mind); var mindBonus = parseInt(values['mind_bonus']);
+            var soul = parseInt(values.soul); var soulBonus = parseInt(values['soul_bonus']);
             var expertise = max_stat(expertises, values);
             var evasion = parseInt(values.evasion);
             var integrity = parseInt(values.integrity);
@@ -939,12 +1063,22 @@
             var evasionBuffs = parseInt(values['evasion_stage']) + parseInt(values['passive_evasion_stage']);
             var soulSaveBuffs = parseInt(values['soul_save_stage']) + parseInt(values['passive_soul_save_stage']);
 
+            var expCap = Math.floor((body + bodyBonus + mind + mindBonus + soul + soulBonus) / 5) * 30;
+            var powerCap = 4 + (Math.floor((body + bodyBonus + mind + mindBonus + soul + soulBonus) / 5) * 2)
+
             setAttrs({
                 "physical_evasion": Math.round((body + expertise + evasion) / 2) + evasionBuffs,
                 "physical_integrity": Math.round((body + expertise + integrity) / 2) + physIntegrityBuffs,
                 "special_evasion": Math.round((mind + expertise + evasion) / 2) + evasionBuffs,
                 "special_integrity": Math.round((mind + expertise + integrity) / 2) + specIntegrityBuffs,
-                "soul_save": Math.round((soul + expertise + integrity) / 2) + soulSaveBuffs
+                "soul_save": Math.round((soul + expertise + integrity) / 2) + soulSaveBuffs,
+
+                "cap_qa_exp": Math.floor(expCap / 2),
+                "cap_sa_exp": expCap,
+                "cap_fa_exp": expCap * 2,
+                "cap_qa_power": Math.floor(powerCap / 2),
+                "cap_sa_power": powerCap,
+                "cap_fa_power": powerCap * 2
             })
         });
     });
@@ -961,7 +1095,7 @@
         });
     });
 
-    const buttonlist = ["basic", "combat"];
+    const buttonlist = ["basic", "combat", "attacks"];
     buttonlist.forEach(button => {
         on(`clicked:tab_${button}`, function() {
             setAttrs({
