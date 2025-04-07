@@ -32,6 +32,9 @@ th, td, .sheet-rolltemplate-pool_roll th, .sheet-rolltemplate-pool_roll td {
 .crimson, .sheet-rolltemplate-pool_roll .sheet-crimson {
     background-color: #e06666;
 }
+.light-crimson, .sheet-rolltemplate-pool_roll .sheet-crimson {
+    background-color: #ea9999;
+}
 .gray, .sheet-rolltemplate-pool_roll .sheet-gray {
     background-color: #ccc;
 }
@@ -40,16 +43,20 @@ th, td, .sheet-rolltemplate-pool_roll th, .sheet-rolltemplate-pool_roll td {
 }
 
 .large, .sheet-rolltemplate-pool_roll .sheet-large {
-    font-size: 14px;
+    font-size: 14px !important;
 }
 
 .small, .sheet-rolltemplate-pool_roll .sheet-small {
-    font-size: 9px;
+    font-size: 9px !important;
 }
 
 /* configure the tab buttons */
 .charsheet .basic,
-.charsheet .combat {
+.charsheet .combat,
+.charsheet .attacks,
+.charsheet .feats,
+.charsheet .exp,
+.charsheet .inventory  {
     display: none;
 }
 
@@ -57,15 +64,23 @@ th, td, .sheet-rolltemplate-pool_roll th, .sheet-rolltemplate-pool_roll td {
 .charsheet .sheet-tabstoggle[value="basic"] ~ div .sheet-button0 {outline: 2px solid red;}
 .charsheet .sheet-tabstoggle[value="combat"] ~ div .sheet-button1 {outline: 2px solid red;}
 .charsheet .sheet-tabstoggle[value="attacks"] ~ div .sheet-button2 {outline: 2px solid red;}
+.charsheet .sheet-tabstoggle[value="feats"] ~ div .sheet-button3 {outline: 2px solid red;}
+.charsheet .sheet-tabstoggle[value="exp"] ~ div .sheet-button4 {outline: 2px solid red;}
+.charsheet .sheet-tabstoggle[value="inventory"] ~ div .sheet-button5 {outline: 2px solid red;}
 
 /* show the selected tab */
 .charsheet .sheet-tabstoggle[value="basic"] ~ div.basic,
 .charsheet .sheet-tabstoggle[value="combat"] ~ div.combat,
-.charsheet .sheet-tabstoggle[value="attacks"] ~ div.attacks {
+.charsheet .sheet-tabstoggle[value="attacks"] ~ div.attacks,
+.charsheet .sheet-tabstoggle[value="feats"] ~ div.feats,
+.charsheet .sheet-tabstoggle[value="exp"] ~ div.exp,
+.charsheet .sheet-tabstoggle[value="inventory"] ~ div.inventory {
     display: block;
 }
 
-.repeating-table {
+.repeating-table, 
+.repeating-row-table > .header,
+.repeating-row-table > .repcontainer > .repitem {
     display: grid;
 }
 
@@ -73,7 +88,13 @@ th, td, .sheet-rolltemplate-pool_roll th, .sheet-rolltemplate-pool_roll td {
     grid-template-columns: repeat(6, 1fr) 6fr;
 }
 
-.repeating-table > div {
+.inventory > .header, .inventory > .repcontainer > .repitem {
+    grid-template-columns: 60% 10% 10% 10% 10%;
+}
+
+.repeating-table > div,
+.repeating-row-table > .header > div,
+.inventory > .repcontainer > .repitem > div {
     padding: 2px 10px;
     font-size: 10px;
     font-weight: bold;
@@ -93,6 +114,10 @@ th, td, .sheet-rolltemplate-pool_roll th, .sheet-rolltemplate-pool_roll td {
 
 .repeating-colspan-5 {
     grid-column-end: span 5;
+}
+
+.repeating-rowspan-2 {
+    grid-row-end: span 2;
 }
 
 .repeating-rowspan-7 {

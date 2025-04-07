@@ -62,6 +62,9 @@
     <button type="action" name="act_tab_basic" class="sheet-button0">Basic</button>
     <button type="action" name="act_tab_combat" class="sheet-button1">Combat</button>
     <button type="action" name="act_tab_attacks" class="sheet-button2">Attacks</button>
+    <button type="action" name="act_tab_feats" class="sheet-button3">Feats</button>
+    <button type="action" name="act_tab_exp" class="sheet-button4">EXP</button>
+    <button type="action" name="act_tab_inventory" class="sheet-button5">Inventory</button>
 </div>
 
 <div class="basic">
@@ -902,6 +905,46 @@
         </div>
     </fieldset>
 </div>
+<div class="feats">
+Feats
+</div>
+<div class="exp">
+Exp
+</div>
+<div class="inventory repeating-row-table">
+    <div class="header">
+        <!--Row 1-->
+        <div class="crimson repeating-rowspan-2 large">Carried Items</div>
+        <div class="light-crimson">Current Bulk</div>
+        <div class="light-crimson">Max Bulk</div>
+        <div class="light-crimson">Encumbered</div>
+        <div class="light-crimson">Overencumbered</div>
+        <!--Row 2-->
+        <div>
+            <input name="attr_item_total_bulk" type="hidden" min="0" value="1"/>
+            <span name="attr_item_total_bulk"></span>
+        </div>
+        <div>
+            <input name="attr_item_total_bulk_max" type="number" min="0" value="1" step="0.1"/>
+        </div>
+        <div><input name="attr_item_encumbered" type="checkbox" value="1"/></div>
+        <div><input name="attr_item_overencumbered" type="checkbox" value="1"/></div>
+        <!--Row 3-->
+        <div class="gray">Item Name</div>
+        <div class="gray">Bulk</div>
+        <div class="gray">Quantity</div>
+        <div class="gray repeating-colspan-2">Total</div>
+    </div>
+    <fieldset class="repeating_inventory">
+        <div><input type="text" name="attr_item_name"/></div>
+        <div><input type="number" name="attr_item_bulk" value="0" min="0" step="0.1"/></div>
+        <div><input type="number" name="attr_item_quantity" value="1" min="1"/></div>
+        <div class="repeating-colspan-2">
+            <input type="hidden" name="attr_item_totalbulk" value="1"/>
+            <span name="attr_item_totalbulk"></span>
+        </div>
+    </fieldset>
+</div>
 
 <rolltemplate class="sheet-rolltemplate-pool_roll">
     <div class="sheet-template-container">
@@ -920,6 +963,32 @@
 </rolltemplate>
 
 <script type="text/worker">
+    /* ===== PARAMETERS ==========
+    destinations = the name of the attribute that stores the total quantity
+            can be a single attribute, or an array: ['total_cost', 'total_weight']
+            If more than one, the matching fields must be in the same order. 
+        section = name of repeating fieldset, without the repeating_
+        fields = the name of the attribute field to be summed
+            destination and fields both can be a single attribute: 'weight'
+            or an array of attributes: ['weight','number','equipped']
+    */
+    const repeatingSum = (destinations, section, fields) => {
+        if (!Array.isArray(destinations)) destinations = [destinations.replace(/\s/g, '').split(',')];
+        if (!Array.isArray(fields)) fields = [fields.replace(/\s/g, '').split(',')];
+        getSectionIDs(`repeating_${section}`, idArray => {
+            const attrArray = idArray.reduce((m, id) => [...m, ...(fields.map(field => `repeating_${section}_${id}_${field}`))], []);
+            getAttrs([...attrArray], v => {
+                const getValue = (section, id, field) => v[`repeating_${section}_${id}_${field}`] === 'on' ? 1 : parseFloat(v[`repeating_${section}_${id}_${field}`]) || 0;
+                const commonMultipliers = (fields.length <= destinations.length) ? [] : fields.splice(destinations.length, fields.length - destinations.length);
+                const output = {};
+                destinations.forEach((destination, index) => {
+                    output[destination] = idArray.reduce((total, id) => total + getValue(section, id, fields[index]) * commonMultipliers.reduce((subtotal, mult) => subtotal * getValue(section, id, mult), 1), 0);
+                });
+                setAttrs(output);
+            }); 
+        }); 
+    };
+
     const attributes = ["body", "mind", "soul"];
     const expertises = ["charming", "cunning", "empathetic", "forceful", "innovative", "instinct", "logic", "teamwork"];
     const skills = [
@@ -954,9 +1023,10 @@
         return Math.max(...totals);
     }
 
-    function dot_roll(expression, name, difficultyMod) {
+    function dot_roll(expression, name, difficultyMod, promptExplode) {
         difficultyPart = difficultyMod ? `[[?{Difficulty?|7} ${difficultyMod}]]` : "?{Difficulty?|7}"
-        roll = `[[[[${expression}]]d10>${difficultyPart}f1!]]`;
+        explodePart = promptExplode ? "!>?{Explode At?|10}" : "!" ;
+        roll = `[[[[${expression}]]d10>${difficultyPart}f1${explodePart}]]`;
         startRoll("&{template:pool_roll} {{name=" + name + "}} {{pool=[[" + expression + "]]}} {{roll=" + roll + "}}", (results) => {
             const total = results.results.roll.result
             const numberOfTens = results.results.roll.dice.filter(i => i >= 10).length;
@@ -976,7 +1046,7 @@
     });
 
     on('clicked:dot_roll', (info) => {
-        dot_roll("?{Num Dice?|1}", "Dot Roll");
+        dot_roll("?{Num Dice?|1}", "Dot Roll", null, true);
     });
 
     on('clicked:accuracy_move_roll', (info) => {
@@ -1095,7 +1165,34 @@
         });
     });
 
-    const buttonlist = ["basic", "combat", "attacks"];
+    // Per-Item Total Bulk Calculation
+    on('change:repeating_inventory:item_bulk change:repeating_inventory:item_quantity', function() {
+        getAttrs(['repeating_inventory_item_bulk', 'repeating_inventory_item_quantity'], idArray => {
+            let itemTotalBulk = parseFloat(idArray.repeating_inventory_item_bulk) * parseInt(idArray.repeating_inventory_item_quantity);
+            setAttrs({
+                repeating_inventory_item_totalbulk: itemTotalBulk
+            })
+        });
+    });
+
+    // Total Bulk Calculation
+    on('change:repeating_inventory remove:repeating_inventory', function() {
+        repeatingSum("item_total_bulk","inventory",["item_bulk","item_quantity"]);
+    });
+
+    // Encumberance/Overencumberance
+    on('change:item_total_bulk change:item_total_bulk_max', function() {
+        getAttrs(['item_total_bulk', 'item_total_bulk_max'], attrs => {
+            let cBulk = parseFloat(attrs.item_total_bulk)
+            let mBulk = parseFloat(attrs.item_total_bulk_max)
+            setAttrs({
+                item_encumbered: cBulk > mBulk ? "1" : "0",
+                item_overencumbered: cBulk > (mBulk * 2) ? "1" : "0"
+            })
+        })
+    });
+
+    const buttonlist = ["basic", "combat", "attacks", "feats", "exp", "inventory"];
     buttonlist.forEach(button => {
         on(`clicked:tab_${button}`, function() {
             setAttrs({
