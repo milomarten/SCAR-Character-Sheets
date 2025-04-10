@@ -92,9 +92,13 @@ th, td, .sheet-rolltemplate-pool_roll th, .sheet-rolltemplate-pool_roll td {
     grid-template-columns: 60% 10% 10% 10% 10%;
 }
 
+.exp-purchases > .header, .exp-purchases > .repcontainer > .repitem {
+    grid-template-columns: 64% 12% 12% 12%;
+}
+
 .repeating-table > div,
 .repeating-row-table > .header > div,
-.inventory > .repcontainer > .repitem > div {
+.repeating-row-table > .repcontainer > .repitem > div {
     padding: 2px 10px;
     font-size: 10px;
     font-weight: bold;
@@ -110,6 +114,10 @@ th, td, .sheet-rolltemplate-pool_roll th, .sheet-rolltemplate-pool_roll td {
 
 .repeating-colspan-2 {
     grid-column-end: span 2;
+}
+
+.repeating-colspan-4 {
+    grid-column-end: span 4;
 }
 
 .repeating-colspan-5 {

@@ -4,7 +4,7 @@
             <tr>
                 <th class="crimson" scope="row">Name:</th>
                 <td class="white">
-                    <input type="text" name="attr_name"/>
+                    <input type="text" name="attr_character_name"/>
                 </td>
             </tr>
             <tr>
@@ -63,7 +63,7 @@
     <button type="action" name="act_tab_combat" class="sheet-button1">Combat</button>
     <button type="action" name="act_tab_attacks" class="sheet-button2">Attacks</button>
     <button type="action" name="act_tab_feats" class="sheet-button3">Feats</button>
-    <button type="action" name="act_tab_exp" class="sheet-button4">EXP</button>
+    <button type="action" name="act_tab_exp" class="sheet-button4">EXP/Merits</button>
     <button type="action" name="act_tab_inventory" class="sheet-button5">Inventory</button>
 </div>
 
@@ -909,7 +909,108 @@
 Feats
 </div>
 <div class="exp">
-Exp
+    <div class="grid grid-2">
+        <div id="exp">
+            <table>
+                <tr>
+                    <th class="crimson large" colspan="4">EXP Information</th>
+                </tr>
+                <tr>
+                    <th class="gray">Spent</th>
+                    <th class="gray">Earned</th>
+                    <th class="gray">Discount</th>
+                    <th class="gray">Effective</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="hidden" name="attr_exp_total_spent" value="0"/>
+                        <span name="attr_exp_total_spent"></span>
+                    </td>
+                    <td>
+                        <input type="number" name="attr_exp_total_earned" value="0"/>
+                    </td>
+                    <td>
+                        <input type="hidden" name="attr_exp_total_discount" value="0"/>
+                        <span name="attr_exp_total_discount"></span>
+                    </td>
+                    <td>
+                        <input type="hidden" name="attr_exp_grand_total" value="0"/>
+                        <span name="attr_exp_grand_total"></span>
+                    </td>
+                </tr>
+            </table>
+            <div class="exp-purchases repeating-row-table">
+                <div class="header">
+                    <!--Row 1-->
+                    <div class="crimson large repeating-colspan-4">EXP Purchases</div>
+                    <!--Row 2-->
+                    <div class="gray">Purchase Info</div>
+                    <div class="gray">Initial</div>
+                    <div class="gray">Discount</div>
+                    <div class="gray">Final</div>
+                </div>
+                <fieldset class="repeating_exppurchases">
+                    <div><input type="text" name="attr_exp_purchase_info"/></div>
+                    <div><input type="number" name="attr_exp_initial" value="0" min="0"/></div>
+                    <div><input type="number" name="attr_exp_discount" value="0" min="0"/></div>
+                    <div>
+                        <input type="hidden" name="attr_exp_total" value="0"/>
+                        <span name="attr_exp_total"></span>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div id="merits">
+            <table>
+                <tr>
+                    <th class="crimson large" colspan="4">Merit Information</th>
+                </tr>
+                <tr>
+                    <th class="gray">Spent</th>
+                    <th class="gray">Earned</th>
+                    <th class="gray">Discount</th>
+                    <th class="gray">Effective</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="hidden" name="attr_merit_total_spent" value="0"/>
+                        <span name="attr_merit_total_spent"></span>
+                    </td>
+                    <td>
+                        <input type="number" name="attr_merit_total_earned" value="0"/>
+                    </td>
+                    <td>
+                        <input type="hidden" name="attr_merit_total_discount" value="0"/>
+                        <span name="attr_merit_total_discount"></span>
+                    </td>
+                    <td>
+                        <input type="hidden" name="attr_merit_grand_total" value="0"/>
+                        <span name="attr_merit_grand_total"></span>
+                    </td>
+                </tr>
+            </table>
+            <div class="exp-purchases repeating-row-table">
+                <div class="header">
+                    <!--Row 1-->
+                    <div class="crimson large repeating-colspan-4">Merit Purchases</div>
+                    <!--Row 2-->
+                    <div class="gray">Purchase Info</div>
+                    <div class="gray">Initial</div>
+                    <div class="gray">Discount</div>
+                    <div class="gray">Final</div>
+                </div>
+                <fieldset class="repeating_meritpurchases">
+                    <div><input type="text" name="attr_merit_purchase_info"/></div>
+                    <div><input type="number" name="attr_merit_initial" value="0" min="0"/></div>
+                    <div><input type="number" name="attr_merit_discount" value="0" min="0"/></div>
+                    <div>
+                        <input type="hidden" name="attr_merit_total" value="0"/>
+                        <span name="attr_merit_total"></span>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="inventory repeating-row-table">
     <div class="header">
@@ -1190,6 +1291,42 @@ Exp
                 item_overencumbered: cBulk > (mBulk * 2) ? "1" : "0"
             })
         })
+    });
+
+    const expMerits = ['exp', 'merit']
+    expMerits.forEach(stat => {
+        // Per-Item Total Calculation
+        on(`change:repeating_${stat}purchases:${stat}_initial change:repeating_${stat}purchases:${stat}_discount`, function(){
+            let prefix = `repeating_${stat}purchases`;
+            let initialStatName = `${prefix}_${stat}_initial`
+            let discountStatName = `${prefix}_${stat}_discount`
+            let totalStatName = `${prefix}_${stat}_total`
+            getAttrs([initialStatName, discountStatName], function(resolved) {
+                let total = parseInt(resolved[initialStatName]) - parseInt(resolved[discountStatName]);
+                let returnBlock = {};
+                returnBlock[totalStatName] = total;
+                setAttrs(returnBlock);
+            })
+        })
+
+        //Spent and Discount
+        on(`change:repeating_${stat}purchases remove:repeating_${stat}purchases`, function() {
+            repeatingSum(`${stat}_total_spent`,`${stat}purchases`,`${stat}_total`);
+            repeatingSum(`${stat}_total_discount`,`${stat}purchases`,`${stat}_discount`);
+        });
+
+        //Grand Effective Total
+        on(`change:${stat}_total_spent change:${stat}_total_discount`, function() {
+            let initialStatName = `${stat}_total_spent`
+            let discountStatName = `${stat}_total_discount`
+            let totalStatName = `${stat}_grand_total`
+            getAttrs([initialStatName, discountStatName], function(resolved) {
+                let total = parseInt(resolved[initialStatName]) + parseInt(resolved[discountStatName]);
+                let returnBlock = {};
+                returnBlock[totalStatName] = total;
+                setAttrs(returnBlock);
+            })
+        });
     });
 
     const buttonlist = ["basic", "combat", "attacks", "feats", "exp", "inventory"];
