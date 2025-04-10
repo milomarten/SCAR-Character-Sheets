@@ -9,9 +9,17 @@ th, td, .sheet-rolltemplate-pool_roll th, .sheet-rolltemplate-pool_roll td {
     font-size: 10px;
 }
 
+textarea.small-textarea {
+    height: unset;
+}
+
 .grid {
     display: grid;
     gap: 10px;
+    padding: 10px 0;
+}
+
+.grid-like-padding {
     padding: 10px 0;
 }
 
@@ -61,12 +69,12 @@ th, td, .sheet-rolltemplate-pool_roll th, .sheet-rolltemplate-pool_roll td {
 }
 
 /* style the active button */
-.charsheet .sheet-tabstoggle[value="basic"] ~ div .sheet-button0 {outline: 2px solid red;}
-.charsheet .sheet-tabstoggle[value="combat"] ~ div .sheet-button1 {outline: 2px solid red;}
-.charsheet .sheet-tabstoggle[value="attacks"] ~ div .sheet-button2 {outline: 2px solid red;}
-.charsheet .sheet-tabstoggle[value="feats"] ~ div .sheet-button3 {outline: 2px solid red;}
-.charsheet .sheet-tabstoggle[value="exp"] ~ div .sheet-button4 {outline: 2px solid red;}
-.charsheet .sheet-tabstoggle[value="inventory"] ~ div .sheet-button5 {outline: 2px solid red;}
+.charsheet .sheet-tabstoggle[value="basic"] ~ div .sheet-button0 {outline: 2px solid #e06666;}
+.charsheet .sheet-tabstoggle[value="combat"] ~ div .sheet-button1 {outline: 2px solid #e06666;}
+.charsheet .sheet-tabstoggle[value="attacks"] ~ div .sheet-button2 {outline: 2px solid #e06666;}
+.charsheet .sheet-tabstoggle[value="feats"] ~ div .sheet-button3 {outline: 2px solid #e06666;}
+.charsheet .sheet-tabstoggle[value="exp"] ~ div .sheet-button4 {outline: 2px solid #e06666;}
+.charsheet .sheet-tabstoggle[value="inventory"] ~ div .sheet-button5 {outline: 2px solid #e06666;}
 
 /* show the selected tab */
 .charsheet .sheet-tabstoggle[value="basic"] ~ div.basic,
@@ -94,6 +102,10 @@ th, td, .sheet-rolltemplate-pool_roll th, .sheet-rolltemplate-pool_roll td {
 
 .exp-purchases > .header, .exp-purchases > .repcontainer > .repitem {
     grid-template-columns: 64% 12% 12% 12%;
+}
+
+.feats > .header, .feats > .repcontainer > .repitem {
+    grid-template-columns: 40% 60%;
 }
 
 .repeating-table > div,

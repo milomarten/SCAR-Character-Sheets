@@ -905,8 +905,18 @@
         </div>
     </fieldset>
 </div>
-<div class="feats">
-Feats
+<div class="feats repeating-row-table grid-like-padding">
+    <div class="header">
+        <!--Row 1-->
+        <div class="crimson repeating-colspan-2 large">Feats</div>
+        <!-- Row 2-->
+        <div class="gray">Name</div>
+        <div class="gray">Effect</div>
+    </div>
+    <fieldset class="repeating_feats">
+        <div><input type="text" name="attr_feat_name"/></div>
+        <div><textarea class="small-textarea" name="attr_feat_description" rows="2"></textarea></div>
+    </fieldset>
 </div>
 <div class="exp">
     <div class="grid grid-2">
@@ -1012,7 +1022,7 @@ Feats
         </div>
     </div>
 </div>
-<div class="inventory repeating-row-table">
+<div class="inventory repeating-row-table grid-like-padding">
     <div class="header">
         <!--Row 1-->
         <div class="crimson repeating-rowspan-2 large">Carried Items</div>
