@@ -907,6 +907,13 @@
                     <option value="FUL">Full</option>
                 </select>
             </div>
+            <!--Row 7-->
+            <div class="repeating-colspan-3">
+                <button type="action" name="act_specificaccuracymoveroll">Roll Accuracy</button>
+            </div>
+            <div class="repeating-colspan-3">
+                <button type="action" name="act_specificpowermoveroll">Roll Power</button>
+            </div>
         </div>
     </fieldset>
 </div>
@@ -1173,6 +1180,29 @@
         dot_roll(pool, "Move Accuracy Roll");
     });
 
+    const moveAccuracyAttributes = ['repeating_attacklist_attack_name', 'repeating_attacklist_attack_type', 'repeating_attacklist_attack_skill', 'repeating_attacklist_attack_accuracy'];
+    on('clicked:repeating_attacklist:specificaccuracymoveroll', (info) => {
+        getAttrs(moveAccuracyAttributes, (move) => {
+            query = [];
+            if (move.repeating_attacklist_attack_type == "physical") {
+                query.push("@{body}[Base Body]", "@{body_bonus}[Body Bonus]");
+            } else if (move.repeating_attacklist_attack_type == "special") {
+                query.push("@{mind}[Base Mind]", "@{mind_bonus}[Mind Bonus]");
+            }
+
+            query.push(`${max(expertises)}`);
+            
+            let lowercaseSkill = move.repeating_attacklist_attack_skill.toLowerCase();
+            let formattedSkill = capitalize(move.repeating_attacklist_attack_skill);
+            query.push(`@{${lowercaseSkill}}[Base ${formattedSkill}]`, `@{${lowercaseSkill}_bonus}[Bonus ${formattedSkill}]`);
+
+            query.push(`${move.repeating_attacklist_attack_accuracy}[Move Accuracy]`);
+            query.push("@{accuracy_stage}[Accuracy Stages]", "@{passive_accuracy_stage}[Passive Accuracy Stages]");
+
+            dot_roll(query.join(" + "), move.repeating_attacklist_attack_name + " Accuracy Roll");
+        });
+    });
+
     on('clicked:power_roll', (info) => {
         physSpecRoll = "?{Phys Or Spec?|Physical,@{body}[Base Body]+@{body_bonus}[Body Bonus]|Special,@{mind}[Base Mind]+@{mind_bonus}[Mind Bonus]}";
         rangeRoll = "?{Range?|Melee Move,@{brawl}[Base Brawl]+@{brawl_bonus}[Bonus Brawl]|Ranged Move,@{send}[Base Send]+@{send_bonus}[Send Bonus]|Melee Weapon,@{clash}[Base Clash]+@{clash_bonus}[Clash Bonus]|Ranged Weapon,@{marksman}[Base Marksman]+@{marksman_bonus}[Marksman Bonus]}";
@@ -1193,6 +1223,40 @@
                     roll: total + numberOfTens
                 }
             );
+        });
+    });
+
+    const movePowerAttributes = ['repeating_attacklist_attack_name', 'repeating_attacklist_attack_type', 'repeating_attacklist_attack_skill', 'repeating_attacklist_attack_power'];
+    on('clicked:repeating_attacklist:specificpowermoveroll', (info) => {
+        getAttrs(movePowerAttributes, (move) => {
+            query = [];
+            if (move.repeating_attacklist_attack_type == "physical") {
+                query.push("@{body}[Base Body]", "@{body_bonus}[Body Bonus]");
+            } else if (move.repeating_attacklist_attack_type == "special") {
+                query.push("@{mind}[Base Mind]", "@{mind_bonus}[Mind Bonus]");
+            }
+            
+            let lowercaseSkill = move.repeating_attacklist_attack_skill.toLowerCase();
+            let formattedSkill = capitalize(move.repeating_attacklist_attack_skill);
+            query.push(`@{${lowercaseSkill}}[Base ${formattedSkill}]`, `@{${lowercaseSkill}_bonus}[Bonus ${formattedSkill}]`);
+            query.push(`${move.repeating_attacklist_attack_power}[Move Power]`);
+            query = query.join(" + ");
+
+            let expressionWithCrit = `?{Crit?|No,${query}|Yes,round((${query}) * 1.5)}`;
+            let typeAdvantage = "[[?{Difficulty?|7} + ?{Type Effectiveness?|Neutral,0|Super Effective,-1|Double Effective,-2|Resistant, 1|Double Resistant, 2}]]";
+
+            roll = `[[[[${expressionWithCrit}]]d10>${typeAdvantage}f1!]]`;
+            startRoll("&{template:pool_roll} {{name=" + move.repeating_attacklist_attack_name + " Power Roll}} {{pool=[[" + expressionWithCrit + "]]}} {{roll=" + roll + "}}", (results) => {
+                const total = results.results.roll.result
+                const numberOfTens = results.results.roll.dice.filter(i => i >= 10).length;
+
+                finishRoll(
+                    results.rollId,
+                    {
+                        roll: total + numberOfTens
+                    }
+                );
+            });
         });
     });
 
