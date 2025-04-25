@@ -65,6 +65,8 @@
     <button type="action" name="act_tab_feats" class="sheet-button3">Feats</button>
     <button type="action" name="act_tab_exp" class="sheet-button4">EXP/Merits</button>
     <button type="action" name="act_tab_inventory" class="sheet-button5">Inventory</button>
+
+    <button type="action" name="act_character_init" class="danger-button">Init Character</button>
 </div>
 
 <div class="basic">
@@ -1415,5 +1417,59 @@
                 sheetTab: button
             });
         });
+    });
+
+    function resolveTemplate(t, rowId, repeating, prefix) {
+        return Object.entries(t)
+            .reduce((acc, cur) => {acc[`repeating_${repeating}_${rowId}_${prefix}_${cur[0]}`] = cur[1]; return acc;}, {})
+    }
+
+    const characterCreateOptions = {
+        exp: 100,
+        move: {
+            name: "Legally Distinct Normal Attack",
+            type: "physical",
+            skill: "Brawl",
+            element: "Normal",
+            accuracy: 0,
+            power: 4,
+            range: "Melee",
+            exp: 20,
+            exp_max: 30
+        },
+        feats: {
+            types: 2,
+            typeTemplate: [{
+                name: "<type> Type Affinity",
+                description: "Able to purchase moves of this type for normal EXP"
+            }, {
+                name: "<type> STAB Affinity",
+                description: "Moves of this type gain STAB on Damage Roll"
+            }]
+        }
+    };
+    on('clicked:character_init', function() {
+        let attrs = {
+            exp_total_earned: characterCreateOptions.exp
+        };
+        setAttrs(attrs);
+
+        let rowId = generateRowID();
+        setAttrs(resolveTemplate(characterCreateOptions.move, rowId, "attacklist", "attack"));
+
+        let rowIdPool = [];
+        while(rowIdPool.length < (characterCreateOptions.feats.types * characterCreateOptions.feats.typeTemplate.length)) {
+            let test = generateRowID();
+            if (!rowIdPool.includes(test)) {
+                rowIdPool.push(test);
+            }
+        }
+
+        for(let t = 0; t < characterCreateOptions.feats.types; t++) {
+            for(let template of characterCreateOptions.feats.typeTemplate) {
+                rowId = rowIdPool.pop();
+                setAttrs(resolveTemplate(template, rowId, "feats", "feat"));
+            }
+        }
     });
 </script>

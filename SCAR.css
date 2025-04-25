@@ -86,6 +86,12 @@ textarea.small-textarea {
     display: block;
 }
 
+.danger-button {
+    color: red;
+    background-color: darkred;
+    float: right;
+}
+
 .repeating-table, 
 .repeating-row-table > .header,
 .repeating-row-table > .repcontainer > .repitem {
