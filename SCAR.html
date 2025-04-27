@@ -1179,7 +1179,7 @@
         rangeRoll = "?{Range?|Melee Move,@{brawl}[Base Brawl]+@{brawl_bonus}[Bonus Brawl]|Ranged Move,@{send}[Base Send]+@{send_bonus}[Send Bonus]|Melee Weapon,@{clash}[Base Clash]+@{clash_bonus}[Clash Bonus]|Ranged Weapon,@{marksman}[Base Marksman]+@{marksman_bonus}[Marksman Bonus]}";
         let pool = `${physSpecRoll} + ${max(expertises)} + ${rangeRoll} + @{accuracy_stage}[Accuracy Stages] +  @{passive_accuracy_stage}[Passive Accuracy Stages] + ?{Move Accuracy|0}[Move Accuracy]`;
         
-        dot_roll(pool, "Move Accuracy Roll");
+        dot_roll(pool, "Move Accuracy Roll", "?{STAB?|No,+0|Yes,-1}");
     });
 
     const moveAccuracyAttributes = ['repeating_attacklist_attack_name', 'repeating_attacklist_attack_type', 'repeating_attacklist_attack_skill', 'repeating_attacklist_attack_accuracy'];
@@ -1201,7 +1201,7 @@
             query.push(`${move.repeating_attacklist_attack_accuracy}[Move Accuracy]`);
             query.push("@{accuracy_stage}[Accuracy Stages]", "@{passive_accuracy_stage}[Passive Accuracy Stages]");
 
-            dot_roll(query.join(" + "), move.repeating_attacklist_attack_name + " Accuracy Roll");
+            dot_roll(query.join(" + "), move.repeating_attacklist_attack_name + " Accuracy Roll", "?{STAB?|No,+0|Yes,-1}");
         });
     });
 
