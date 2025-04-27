@@ -103,7 +103,7 @@ textarea.small-textarea {
 }
 
 .inventory > .header, .inventory > .repcontainer > .repitem {
-    grid-template-columns: 60% 10% 10% 10% 10%;
+    grid-template-columns: 40% 15% 15% 15% 15%;
 }
 
 .exp-purchases > .header, .exp-purchases > .repcontainer > .repitem {
@@ -155,9 +155,9 @@ textarea.small-textarea {
 }
 
 .small-textbox {
-    width: 3.5em;
+    width: 3.5em !important;
 }
 
 .middle-textbox {
-    width: 7em;
+    width: 7em !important;
 }
