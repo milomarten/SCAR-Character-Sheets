@@ -97,9 +97,8 @@ Note that this doesn't actually clear anything out, so it is not explictly dange
 - Damage Rolls always assume you want the 1.5x bonus for a Crit. If you want the option for exploding 9s, you will have to roll manually for now.
 - Current Bulk display gets squirrely when using numbers not representable in binary, such as 0.3. 
 - Max Bulk could be computed, but currently is manually entered.
-- Temp HP and Extra Max HP are separate stats, so displaying hp in a token bar will only show the current and max HP without considering those HP bonuses.
+- Temp HP and Current HP are separate stats, so displaying hp in a token bar will not show the Temp HP. Extra Max HP *is* factored into Max HP, so that will display correctly.
 
 ## Future Enhancements
 - There is no specific spot for Money in the inventory. I handle it by setting "Bulk" to be the amount of money, and "Quantity" as 0.
 - Armor section.
-- Effective HP stat, which accounts for HP bonuses.

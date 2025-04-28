@@ -75,6 +75,7 @@ textarea.small-textarea {
 .charsheet .sheet-tabstoggle[value="feats"] ~ div .sheet-button3 {outline: 2px solid #e06666;}
 .charsheet .sheet-tabstoggle[value="exp"] ~ div .sheet-button4 {outline: 2px solid #e06666;}
 .charsheet .sheet-tabstoggle[value="inventory"] ~ div .sheet-button5 {outline: 2px solid #e06666;}
+.charsheet .sheet-tabstoggle[value="all"] ~ div .sheet-button6 {outline: 2px solid #e06666;}
 
 /* show the selected tab */
 .charsheet .sheet-tabstoggle[value="basic"] ~ div.basic,
@@ -82,7 +83,8 @@ textarea.small-textarea {
 .charsheet .sheet-tabstoggle[value="attacks"] ~ div.attacks,
 .charsheet .sheet-tabstoggle[value="feats"] ~ div.feats,
 .charsheet .sheet-tabstoggle[value="exp"] ~ div.exp,
-.charsheet .sheet-tabstoggle[value="inventory"] ~ div.inventory {
+.charsheet .sheet-tabstoggle[value="inventory"] ~ div.inventory,
+.charsheet .sheet-tabstoggle[value="all"] ~ div {
     display: block;
 }
 

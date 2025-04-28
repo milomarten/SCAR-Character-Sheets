@@ -65,6 +65,7 @@
     <button type="action" name="act_tab_feats" class="sheet-button3">Feats</button>
     <button type="action" name="act_tab_exp" class="sheet-button4">EXP/Merits</button>
     <button type="action" name="act_tab_inventory" class="sheet-button5">Inventory</button>
+    <button type="action" name="act_tab_all" class="sheet-button6">All Tabs</button>
 
     <button type="action" name="act_character_init" class="danger-button">Init Character</button>
 </div>
@@ -74,7 +75,7 @@
         <div id="stats" class="section">
             <table>
                 <tr>
-                    <th class="crimson large" colspan="6">Quick Reference Stats</th>
+                    <th class="crimson large" colspan="6">Quick Reference Stats <button type="action" name="act_heal">Heal</button></th>
                 </tr>
                 <tr>
                     <th class="gray">Current HP</th>
@@ -621,7 +622,7 @@
         <div id="stats2" class="section">
             <table>
                 <tr>
-                    <th class="crimson large" colspan="6">Quick Reference Stats</th>
+                    <th class="crimson large" colspan="6">Quick Reference Stats <button type="action" name="act_heal">Heal</button></th>
                 </tr>
                 <tr>
                     <th class="gray">Current HP</th>
@@ -1296,6 +1297,14 @@
         });
     });
 
+    on('clicked:heal', () => {
+        getAttrs(['hp_max'], values => {
+            setAttrs({
+                "hp": values.hp_max
+            })
+        })
+    })
+
     // Evasion and Integrity calculations
     const evasionIntegrityStats = ['body', 'mind', 'soul', ...expertises, 'evasion', 'integrity'].flatMap(stat => [stat, `${stat}_bonus`]);
     const integrityStageStats = ['phys_integrity_stage', 'spec_integrity_stage', 'passive_phys_integrity_stage', 'passive_spec_integrity_stage'];
@@ -1410,7 +1419,7 @@
         });
     });
 
-    const buttonlist = ["basic", "combat", "attacks", "feats", "exp", "inventory"];
+    const buttonlist = ["basic", "combat", "attacks", "feats", "exp", "inventory", "all"];
     buttonlist.forEach(button => {
         on(`clicked:tab_${button}`, function() {
             setAttrs({
