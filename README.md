@@ -75,6 +75,12 @@ This tab allows you to record all your EXP and Merit purchases. This is essentia
 
 ### Inventory
 This tab allows you to record your inventory. At the top are some useful fields:
+- The amount of money you have.
+    - Currency names can be customized to fit your setting.
+    - Checking "Auto Rollover" will enforce rollover and rollunder rules. This means Copper and Silver amounts will be normalized
+    to always be between 0 and 9, distributing higher or lower pieces as necessary. If unchecked, all fields will be totally manual.
+        - Rollover rules will assume that 10 of the rightmost currency equals one of the middle currency, and 10 of the middle currency equals 1 of the leftmost currency.
+        - Negative Silver or Copper pieces are supported. When Auto Rollover is enabled, this will decrease the next-highest unit by 1, and normalize the unit between 0 and 9. As an example, 5 Gold -1 Silver would become 4 Gold 9 Silver.
 - The current bulk of your entire inventory.
 - The maximum bulk you can carry.
 - A checkbox which indicates if you are encumbered.
@@ -101,7 +107,6 @@ Note that this doesn't actually clear anything out, so it is not explictly dange
 - Temp HP and Current HP are separate stats, so displaying hp in a token bar will not show the Temp HP. Extra Max HP *is* factored into Max HP, so that will display correctly.
 
 ## Future Enhancements
-- There is no specific spot for Money in the inventory. I handle it by setting "Bulk" to be the amount of money, and "Quantity" as 0.
 - Armor section. (Armor is currently being heavily edited, so I won't add this until it's stable)
 - Display condensed Attack List on Combat tab?
 - Conditions Block on Combat tab

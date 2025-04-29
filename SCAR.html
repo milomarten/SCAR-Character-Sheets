@@ -1082,6 +1082,33 @@
     </div>
 </div>
 <div class="inventory repeating-row-table grid-like-padding">
+    <div class="grid">
+        <table>
+            <tr>
+                <th class="crimson large" colspan="3">
+                    Money
+                    <div style="float: right;">
+                        <input id="money-autocalculate" type="checkbox" name="attr_money_autocalculate" value="true" checked/>
+                        <label for="money-autocalculate" class="my-label">Auto Rollup?</label>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input class="middle-textbox" type="number" name="attr_gold_pieces" value="0" min="0"/>
+                    <input class="middle-textbox" type="text" name="attr_gold_pieces_name" value="Gold"/>
+                </td>
+                <td>
+                    <input type="number" name="attr_silver_pieces" value="0"/>
+                    <input class="middle-textbox" type="text" name="attr_silver_pieces_name" value="Silver"/>
+                </td>
+                <td>
+                    <input type="number" name="attr_copper_pieces" value="0"/>
+                    <input class="middle-textbox" type="text" name="attr_copper_pieces_name" value="Copper"/>
+                </td>
+            </tr>
+        </table>
+    </div>
     <div class="header">
         <!--Row 1-->
         <div class="crimson repeating-rowspan-2 large">Carried Items</div>
@@ -1540,5 +1567,40 @@
                 setAttrs(resolveTemplate(template, rowId, "feats", "feat"));
             }
         }
+    });
+
+    const moneyAttributes = ["gold_pieces", "silver_pieces", "copper_pieces"];
+    on(moneyAttributes.map(a => `change:${a}`).join(' '), () => {
+        getAttrs([...moneyAttributes, "money_autocalculate"], value => {
+            if (value.money_autocalculate == "0") return;
+
+            let gold = parseInt(value.gold_pieces);
+            let silver = parseInt(value.silver_pieces);
+            let copper = parseInt(value.copper_pieces);
+
+            if (copper >= 10) {
+                silver += Math.floor(copper / 10);
+                copper = copper % 10;
+            } else if (copper < 0) {
+                silver -= Math.ceil(-copper / 10);
+                copper = 10 + (copper % 10);
+                if (copper == 10) { copper = 0; }
+            }
+
+            if (silver >= 10) {
+                gold += Math.floor(silver / 10);
+                silver = silver % 10; 
+            } else if (silver < 0) {
+                gold -= Math.ceil(-silver / 10);
+                silver = 10 + (silver % 10);
+                if (silver == 10) { silver = 0; }
+            }
+
+            setAttrs({
+                gold_pieces: gold,
+                silver_pieces: silver,
+                copper_pieces: copper
+            });
+        });
     });
 </script>

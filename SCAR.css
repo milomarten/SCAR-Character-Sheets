@@ -163,3 +163,10 @@ textarea.small-textarea {
 .middle-textbox {
     width: 7em !important;
 }
+
+.my-label {
+    display: inline !important;
+    padding-left: 3px !important;
+    font-weight: lighter !important;
+    font-size: 0.8em !important;
+}
