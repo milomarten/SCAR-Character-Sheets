@@ -911,10 +911,16 @@
                 </select>
             </div>
             <!--Row 7-->
-            <div class="repeating-colspan-3">
+            <div class="repeating-colspan-2">
+                <button type="roll" value=
+                "&{template:default} {{name=@{attack_name}}} {{type=@{attack_type}}} {{element=@{attack_element}}} {{base Accuracy=@{attack_accuracy}}} {{base Power=@{attack_power}}} {{range=@{attack_range}}} {{action=@{attack_action}}} {{description=@{attack_freetext}}}">
+                Show in Chat
+            </button>
+            </div>
+            <div class="repeating-colspan-2">
                 <button type="action" name="act_specificaccuracymoveroll">Roll Accuracy</button>
             </div>
-            <div class="repeating-colspan-3">
+            <div class="repeating-colspan-2">
                 <button type="action" name="act_specificpowermoveroll">Roll Power</button>
             </div>
         </div>
@@ -929,7 +935,10 @@
         <div class="gray">Effect</div>
     </div>
     <fieldset class="repeating_feats">
-        <div><input type="text" name="attr_feat_name"/></div>
+        <div>
+            <button type="roll" value="&{template:default} {{name=Feat - @{feat_name} }} {{description=@{feat_description}}}"></button>
+            <input type="text" name="attr_feat_name"/>
+        </div>
         <div><textarea class="small-textarea" name="attr_feat_description" rows="2"></textarea></div>
     </fieldset>
 </div>
@@ -1073,6 +1082,22 @@
 </div>
 
 <rolltemplate class="sheet-rolltemplate-pool_roll">
+    <div class="sheet-template-container">
+        <table>
+            <tr><th class="crimson large" colspan="2">{{name}}</th></tr>
+            <tr>
+                <th class="gray">Dice Pool</th>
+                <td>{{pool}}</td>
+            </tr>
+            <tr>
+                <th class="gray">Dot Dice Roll</th>
+                <td>{{computed::roll}}</td>
+            </tr>
+        </table>
+    </div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-pool_roll_accuracy">
     <div class="sheet-template-container">
         <table>
             <tr><th class="crimson large" colspan="2">{{name}}</th></tr>

@@ -104,8 +104,6 @@ Note that this doesn't actually clear anything out, so it is not explictly dange
 - Armor section. (Armor is currently being heavily edited, so I won't add this until it's stable)
 - Combat Skills block enhancements - Display Physical/Special Attributes, show bonuses inline.
 - Display condensed Attack List on Combat tab?
-- Show Attack, Show Feat buttons
 - Conditions Block on Combat tab
 - Typing Block as a Global block?
-- Crit threshold on Accuracy rolls
 - Long Rest, Short Rest, Breather buttons
