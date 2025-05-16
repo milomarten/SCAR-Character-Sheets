@@ -22,7 +22,7 @@ All dot-dice buttons take all the rules into account. Roll20 doesn't natively su
 ### Basic
 The basic tab contains the blocks for your general attributes.
 - Quick Reference Stats includes your HP, Exhaustion, Evasions, Integritys, Soul Save, and Boosts per session.
-- Movement breaks your movement distances out by type. 
+- Movement breaks your movement distances out by type. When you Speed stat changes, the bonus will also appear here, as +/- the additional feet of movement you gain.
 - Make Skill Check is a utility button that performs a dot roll for a certain skill check. The system will prompt you for the Attribute, Expertise, and Skill you want to use, as well as the difficulty of the check.
 - Do Dot Roll is a utility button that performs any dot roll you wish. The system will prompt you for the pool size, the difficulty, and the explosion threshold.
 - Attributes, Expertises, Natural Skills, Trained Skills, and Knowledge Skills are broken out into separate blocks. The B column is for bonuses for each stat.
@@ -31,7 +31,10 @@ The basic tab contains the blocks for your general attributes.
 ### Combat
 The Combat tab contains useful blocks for being in combat.
 - Quick Reference Stats and Movement are the same as the Basic table
-- The Stat Change block are changes to your battle stats. They are divided in two: In Battle changes end at the end of battle, while Out of Battle changes last long-term, possibly forever.
+- The Stat Change block are changes to your battle stats. They are divided in two: In Battle changes end at the end of battle, while Out of Battle changes last long-term, possibly forever. Stats with an asterisk must be handled manually!
+    - Physical and Special Damage must be factored in manually. Add this number to the number of successes for a physical or special attack damage roll, respectively.
+    - Crit Chance is complex logic, and will require manual rolling.
+    - Initiative changes affect the turn order in specific ways that can't be controlled by a character sheet script.
 - The Conditions block are afflicitions you've received during battle. Any number of conditions can be applied at once. The "Clear All" button will remove all conditions you have.
     - Name is the name of the condition. This is free-text, to support custom conditions.
     - Level is the level of the condition. Conditions start at Level 1, and can increase up to Level 3. Each successful Cleanse reduces the level by 1.

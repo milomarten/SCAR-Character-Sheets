@@ -135,7 +135,7 @@
         <div id="movement" class="section">
             <table>
                 <tr>
-                    <th class="crimson large" colspan="6">Movement</th>
+                    <th class="crimson large" colspan="6">Movement <span name="attr_movement_bonus"></span></th>
                 </tr>
                 <tr>
                     <th class="gray" scope="col">Land</th>
@@ -682,7 +682,7 @@
         <div id="movement" class="section">
             <table>
                 <tr>
-                    <th class="crimson large" colspan="6">Movement</th>
+                    <th class="crimson large" colspan="6">Movement <span name="attr_movement_bonus"></span></th>
                 </tr>
                 <tr>
                     <th class="gray" scope="col">Land</th>
@@ -715,12 +715,12 @@
                     <th class="gray">Out of Battle</th>
                 </tr>
                 <tr>
-                    <th class="gray">Phys. Damage</th>
+                    <th class="gray">*Phys. Damage</th>
                     <td><input type="number" name="attr_phys_damage_stage" value="0" min="-6" max="6"/></td>
                     <td><input type="number" name="attr_passive_phys_damage_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
-                    <th class="gray">Spec. Damage</th>
+                    <th class="gray">*Spec. Damage</th>
                     <td><input type="number" name="attr_spec_damage_stage" value="0" min="-6" max="6"/></td>
                     <td><input type="number" name="attr_passive_spec_damage_stage" value="0" min="-6" max="6"/></td>
                 </tr>
@@ -740,7 +740,7 @@
                     <td><input type="number" name="attr_passive_soul_save_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
-                    <th class="gray">Crit Chance</th>
+                    <th class="gray">*Crit Chance</th>
                     <td><input type="number" name="attr_crit_chance_stage" value="0" min="-3" max="3"/></td>
                     <td><input type="number" name="attr_passive_crit_chance_stage" value="0" min="-3" max="3"/></td>
                 </tr>
@@ -755,7 +755,7 @@
                     <td><input type="number" name="attr_passive_evasion_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
-                    <th class="gray">Initiative</th>
+                    <th class="gray">*Initiative</th>
                     <td><input type="number" name="attr_initiative_stage" value="0" min="-6" max="6"/></td>
                     <td><input type="number" name="attr_passive_initiative_stage" value="0" min="-6" max="6"/></td>
                 </tr>
@@ -1458,6 +1458,25 @@
             setAttrs({
                 "boost_per_session": Math.round(total / 3)
             })
+        });
+    });
+
+    // Speed Bonus calculation
+    const speedStats = ['speed_stage', 'passive_speed_stage']
+    on(speedStats.map(stat => `change:${stat}`).join(' '), () => {
+        getAttrs(speedStats, values => {
+            let totalBonus = (parseInt(values['speed_stage']) + parseInt(values['passive_speed_stage'])) * 5
+            if (totalBonus > 0) {
+                totalBonus = "+" + totalBonus
+            } else if (totalBonus < 0) {
+                totalBonus = totalBonus.toString()
+            } else {
+                totalBonus = " "
+            }
+            console.log("Bonus", totalBonus)
+            setAttrs({
+                "movement_bonus": totalBonus
+            });
         });
     });
 
