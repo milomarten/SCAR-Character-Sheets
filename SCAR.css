@@ -31,6 +31,10 @@ textarea.small-textarea {
     grid-template-columns: repeat(3, 1fr);
 }
 
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
 .section {
     display: flex;
     justify-content: center;
@@ -100,6 +104,10 @@ textarea.small-textarea {
     display: grid;
 }
 
+.full-size {
+    width: 100%;
+}
+
 .item-table {
     grid-template-columns: repeat(6, 1fr) 6fr;
 }
@@ -114,6 +122,10 @@ textarea.small-textarea {
 
 .feats > .header, .feats > .repcontainer > .repitem {
     grid-template-columns: 40% 60%;
+}
+
+.conditions > .header, .conditions > .repcontainer > .repitem {
+    grid-template-columns: 50% 15% 15% 20%;
 }
 
 .repeating-table > div,

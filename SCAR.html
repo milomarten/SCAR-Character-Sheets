@@ -703,85 +703,87 @@
             </table>
         </div>
     </div>
-    <div class="grid grid-3">
-        <button type="action" name="act_accuracy_move_roll">Roll Move Accuracy</button>
-        <button type="action" name="act_accuracy_effect_roll">Roll Effect Accuracy</button>
-        <button type="action" name="act_power_roll">Roll Power</button>
-    </div>
     <div class="grid grid-2">
-        <div id="passive-stat-changes" class="section">
+        <div id="stat-changes" class="section">
             <table>
                 <tr>
-                    <th class="crimson large" colspan="4">Passive Stat Changes</th>
+                    <th class="crimson large" colspan="3">Stat Changes <button type="action" name="act_reset_stat_changes">Reset</button></th>
                 </tr>
                 <tr>
-                    <th class="gray">Phys. Damage</th>
-                    <td><input type="number" name="attr_passive_phys_damage_stage" value="0" min="-6" max="6"/></td>
-                    <th class="gray">Crit Chance</th>
-                    <td><input type="number" name="attr_passive_crit_chance_stage" value="0" min="-3" max="3"/></td>
-                </tr>
-                <tr>
-                    <th class="gray">Spec. Damage</th>
-                    <td><input type="number" name="attr_passive_spec_damage_stage" value="0" min="-6" max="6"/></td>
-                    <th class="gray">Accuracy</th>
-                    <td><input type="number" name="attr_passive_accuracy_stage" value="0" min="-6" max="6"/></td>
-                </tr>
-                <tr>
-                    <th class="gray">Phys. Integrity</th>
-                    <td><input type="number" name="attr_passive_phys_integrity_stage" value="0" min="-6" max="6"/></td>
-                    <th class="gray">Evasion</th>
-                    <td><input type="number" name="attr_passive_evasion_stage" value="0" min="-6" max="6"/></td>
-                </tr>
-                <tr>
-                    <th class="gray">Spec. Integrity</th>
-                    <td><input type="number" name="attr_passive_spec_integrity_stage" value="0" min="-6" max="6"/></td>
-                    <th class="gray">Initiative</th>
-                    <td><input type="number" name="attr_passive_initiative_stage" value="0" min="-6" max="6"/></td>
-                </tr>
-                <tr>
-                    <th class="gray">Soul Save</th>
-                    <td><input type="number" name="attr_passive_soul_save_stage" value="0" min="-6" max="6"/></td>
-                    <th class="gray">Speed</th>
-                    <td><input type="number" name="attr_passive_speed_stage" value="0" min="-6" max="6"/></td>
-                </tr>
-            </table>
-        </div>
-        <div id="active-stat-changes" class="section">
-            <table>
-                <tr>
-                    <th class="crimson large" colspan="4">Active Stat Changes <button type="action" name="act_reset_stat_changes">Reset</button></th>
+                    <th class="gray">Stat Name</th>
+                    <th class="gray">In Battle</th>
+                    <th class="gray">Out of Battle</th>
                 </tr>
                 <tr>
                     <th class="gray">Phys. Damage</th>
                     <td><input type="number" name="attr_phys_damage_stage" value="0" min="-6" max="6"/></td>
-                    <th class="gray">Crit Chance</th>
-                    <td><input type="number" name="attr_crit_chance_stage" value="0" min="-3" max="3"/></td>
+                    <td><input type="number" name="attr_passive_phys_damage_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
                     <th class="gray">Spec. Damage</th>
                     <td><input type="number" name="attr_spec_damage_stage" value="0" min="-6" max="6"/></td>
-                    <th class="gray">Accuracy</th>
-                    <td><input type="number" name="attr_accuracy_stage" value="0" min="-6" max="6"/></td>
+                    <td><input type="number" name="attr_passive_spec_damage_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
                     <th class="gray">Phys. Integrity</th>
                     <td><input type="number" name="attr_phys_integrity_stage" value="0" min="-6" max="6"/></td>
-                    <th class="gray">Evasion</th>
-                    <td><input type="number" name="attr_evasion_stage" value="0" min="-6" max="6"/></td>
+                    <td><input type="number" name="attr_passive_phys_integrity_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
                     <th class="gray">Spec. Integrity</th>
                     <td><input type="number" name="attr_spec_integrity_stage" value="0" min="-6" max="6"/></td>
-                    <th class="gray">Initiative</th>
-                    <td><input type="number" name="attr_initiative_stage" value="0" min="-6" max="6"/></td>
+                    <td><input type="number" name="attr_passive_spec_integrity_stage" value="0" min="-6" max="6"/></td>
                 </tr>
                 <tr>
                     <th class="gray">Soul Save</th>
                     <td><input type="number" name="attr_soul_save_stage" value="0" min="-6" max="6"/></td>
+                    <td><input type="number" name="attr_passive_soul_save_stage" value="0" min="-6" max="6"/></td>
+                </tr>
+                <tr>
+                    <th class="gray">Crit Chance</th>
+                    <td><input type="number" name="attr_crit_chance_stage" value="0" min="-3" max="3"/></td>
+                    <td><input type="number" name="attr_passive_crit_chance_stage" value="0" min="-3" max="3"/></td>
+                </tr>
+                <tr>
+                    <th class="gray">Accuracy</th>
+                    <td><input type="number" name="attr_accuracy_stage" value="0" min="-6" max="6"/></td>
+                    <td><input type="number" name="attr_passive_accuracy_stage" value="0" min="-6" max="6"/></td>
+                </tr>
+                <tr>
+                    <th class="gray">Evasion</th>
+                    <td><input type="number" name="attr_evasion_stage" value="0" min="-6" max="6"/></td>
+                    <td><input type="number" name="attr_passive_evasion_stage" value="0" min="-6" max="6"/></td>
+                </tr>
+                <tr>
+                    <th class="gray">Initiative</th>
+                    <td><input type="number" name="attr_initiative_stage" value="0" min="-6" max="6"/></td>
+                    <td><input type="number" name="attr_passive_initiative_stage" value="0" min="-6" max="6"/></td>
+                </tr>
+                <tr>
                     <th class="gray">Speed</th>
                     <td><input type="number" name="attr_speed_stage" value="0" min="-6" max="6"/></td>
+                    <td><input type="number" name="attr_passive_speed_stage" value="0" min="-6" max="6"/></td>
                 </tr>
             </table>
+        </div>
+        <div id="conditions" class="section">
+            <div class="conditions repeating-row-table full-size">
+                <div class="header">
+                    <!--Row 1-->
+                    <div class="crimson repeating-colspan-4 large">Conditions <button type="action" name="act_clear_conditions">Clear All</button></div>
+                    <!-- Row 2-->
+                    <div class="gray">Name</div>
+                    <div class="gray">Level</div>
+                    <div class="gray">Save</div>
+                    <div class="gray"><!--Intentionally empty--></div>
+                </div>
+                <fieldset class="repeating_conditions">
+                    <div><input type="text" name="attr_condition_name"/></div>
+                    <div><input type="number" name="attr_condition_level" value="1" min="1" max="3"/></div>
+                    <div><input type="number" name="attr_condition_save" value="0" min="0"/></div>
+                    <div><button type="action" name="act_attemptcleanse">Cleanse</button></div>
+                </fieldset>
+            </div>
         </div>
     </div>
 </div>
@@ -897,8 +899,8 @@
     </div>
     <div class="grid grid-3">
         <button type="action" name="act_accuracy_move_roll">Roll Move Accuracy</button>
-        <button type="action" name="act_accuracy_effect_roll">Roll Effect Accuracy</button>
         <button type="action" name="act_power_roll">Roll Power</button>
+        <button type="action" name="act_accuracy_effect_roll">Roll Effect Accuracy</button>
     </div>
     <fieldset class="repeating_attacklist">
         <div class="repeating-table item-table">
@@ -1240,7 +1242,7 @@
         difficultyPart = difficultyMod ? `[[?{Difficulty?|7} ${difficultyMod}]]` : "?{Difficulty?|7}"
         explodePart = promptExplode ? "!>?{Explode At?|10}" : "!" ;
         roll = `[[[[${expression}]]d10>${difficultyPart}f1${explodePart}]]`;
-        startRoll("&{template:pool_roll} {{name=" + name + "}} {{pool=[[" + expression + "]]}} {{roll=" + roll + "}}", (results) => {
+        startRoll("&{template:pool_roll} {{name= @{character_name}'s " + name + "}} {{pool=[[" + expression + "]]}} {{roll=" + roll + "}}", (results) => {
             const total = results.results.roll.result
             const numberOfTens = results.results.roll.dice.filter(i => i >= 10).length;
 
@@ -1255,11 +1257,11 @@
 
     on('clicked:skill_check', (info) => {
         pool = `${query("Attribute", attributes)} + ${query("Expertise", expertises)} + ${query("Skill", skills)} + ?{Pool Bonus|0}`;
-        dot_roll(pool, "Skill Check");
+        dot_roll(pool, "?{Label?|Skill Check}");
     });
 
     on('clicked:dot_roll', (info) => {
-        dot_roll("?{Num Dice?|1}", "Dot Roll", null, true);
+        dot_roll("?{Num Dice?|1}", "?{Label?|Dot Roll}", null, true);
     });
 
     on('clicked:accuracy_move_roll', (info) => {
@@ -1369,6 +1371,22 @@
             "soul_save_stage": 0,
             "speed_stage": 0
         })
+    });
+
+    on('clicked:clear_conditions', (info) => {
+        getSectionIDs("repeating_conditions", (ids) => {
+            for (const id of ids) {
+                removeRepeatingRow("repeating_conditions_" + id);
+            }
+        });
+    });
+
+    on('clicked:repeating_conditions:attemptcleanse', (info) => {
+        getAttrs(['repeating_conditions_condition_name'], attrs => {
+            let pool = `@{soul}[Base Soul] + @{soul_bonus}[Soul Bonus] + ${max(expertises)} + ${query("Skill 1", skills)} + ${query("Skill 2", skills)}`;
+        
+            dot_roll(pool, "Cleanse " + attrs['repeating_conditions_condition_name']);
+        });
     });
 
     // Max HP calculation

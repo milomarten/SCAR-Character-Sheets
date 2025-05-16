@@ -31,18 +31,22 @@ The basic tab contains the blocks for your general attributes.
 ### Combat
 The Combat tab contains useful blocks for being in combat.
 - Quick Reference Stats and Movement are the same as the Basic table
-- Roll Move Accuracy is a utility button that lets you perform an Accuracy roll for moves. It will prompt you for the Attribute, Skill, STAB, and base Difficulty.
-- Roll Effect Accuracy is a utility button that lets you perform an Accuracy roll for effects. It will prompt you for the Skill and base Difficulty.
-- Roll Power is a utility button that lets you perform a Power roll. It will prompt you for the Attribute, Skill, Base Power, whether it's a Crit, type effectiveness, and base Difficulty.
-- The Passive Stat Change block are long-term increases to your battle stats.
-- The Active Stat Change block are your short-term increases to your battle stats. The Reset button zeroes them out.
+- The Stat Change block are changes to your battle stats. They are divided in two: In Battle changes end at the end of battle, while Out of Battle changes last long-term, possibly forever.
+- The Conditions block are afflicitions you've received during battle. Any number of conditions can be applied at once. The "Clear All" button will remove all conditions you have.
+    - Name is the name of the condition. This is free-text, to support custom conditions.
+    - Level is the level of the condition. Conditions start at Level 1, and can increase up to Level 3. Each successful Cleanse reduces the level by 1.
+    - Save is the threshold you need to hit on a Cleanse attempt for a success. The save is equal to the *inflictor's* Soul + Expertise + Skill, divided by 2, plus any bonuses.
+    - The Cleanse button will help you attempt a Cleanse action. If the number rolled is greater than or equal to the save, the level is decreased by 1.
 
 ### Attacks
 The Attack tab also contains useful blocks for being in combat.
 - Combat Attributes lets you reference the attributes you use for moves.
 - Combat Skills lets you reference the skills you use for moves.
 - EXP Caps describe the amount of EXP and Power you are allowed to use when creating a move of each Action type.
-- Utility Rolls are the same as the Combat tab.
+- Utility buttons are provided for generic attacks. You can also use the attack block itself to automatically fill out most of this info.
+    - Roll Move Accuracy is a utility button that lets you perform an Accuracy roll for moves. It will prompt you for the Attribute, Skill, STAB, and base Difficulty.
+    - Roll Effect Accuracy is a utility button that lets you perform an Accuracy roll for effects. It will prompt you for the Skill and base Difficulty.
+    - Roll Power is a utility button that lets you perform a Power roll. It will prompt you for the Attribute, Skill, Base Power, whether it's a Crit, type effectiveness, and base Difficulty.
 - You may then add each Attack as a separate block using the "Add" button. Each move block contains:
     - The move name
     - Whether the move is Physical or Special
@@ -108,7 +112,5 @@ Note that this doesn't actually clear anything out, so it is not explictly dange
 
 ## Future Enhancements
 - Armor section. (Armor is currently being heavily edited, so I won't add this until it's stable)
-- Display condensed Attack List on Combat tab?
-- Conditions Block on Combat tab
-- Typing Block as a Global block?
-- Long Rest, Short Rest, Breather buttons
+- Display condensed Attack List on Combat tab
+- Typing Block as a Global block
