@@ -608,11 +608,15 @@
                 </tr>
             </table>
         </div>
-        <div id="custom_skills" class="section">
+        <div id="custom_skills" class="customskills repeating-row-table">
+            <div class="header">
+                <div class="crimson repeating-colspan-2 large">Custom Skills</div>
+                <div class="gray repeating-colspan-1 large">Bonus</div>
+            </div>
             <fieldset class="repeating_customskills">
-                <input type="text" name="attr_custom_name"/>
-                <input type="number" name="attr_custom_value" min="0" value="0" max="5"/>
-                <input type="number" name="attr_custom_value_bonus" value="0"/>
+                <div><input class="middle-textbox" type="text" name="attr_custom_name"/></div>
+                <div><input type="number" name="attr_custom_value" min="0" value="0" max="5"/></div>
+                <div><input type="number" name="attr_custom_value_bonus" value="0"/></div>
             </fieldset>
         </div>
     </div>
