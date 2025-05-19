@@ -1,3 +1,5 @@
+![Screenshot of the SCAR Character Sheet in Roll20](/images/FlavorImage.png)
+
 # SCAR Character Sheets
 The SCAR system is a tabletop roleplaying game currently in active development. You can find the docs [Here](https://scar-srd.com). Because it is in active development, rules and mechanics may change rapidly, even within the course of a day. I am not a part of SCAR's development, so I cannot always update this sheet to be totally abreast of the changes. 
 
