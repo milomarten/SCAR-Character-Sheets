@@ -21,8 +21,16 @@ All dot-dice buttons take all the rules into account. Roll20 doesn't natively su
 
 ### Basic
 The basic tab contains the blocks for your general attributes.
-- Quick Reference Stats includes your HP, Exhaustion, Evasions, Integritys, Soul Save, and Boosts per session. Max HP, Exhaustion Penalty, Evasions, Integrities, Soul Saves, and Boosts Per Session are all automatically calculated for you.
-- Movement breaks your movement distances out by type. When you Speed stat changes, the bonus will also appear here, as +/- the additional feet of movement you gain.
+- Quick Reference Stats contains two blocks of useful stats:
+    - Current HP, Max HP, Temp HP, and Extra Max HP are all related, of course, to HP. Max HP is computed automatically, taking Extra Max HP into account.
+    - Current Exhaustion is the number of Exhaustion points you currently have. The Exhaustion Penalty is automatically calculated based on that.
+    - Evasions are your ability to avoid attacks. They are automatically calculated.
+    - Integritys are your ability to soak up damage. They are automatically calculated.
+    - Soul Save is your ability to resist a condition. It is automatically calculated.
+    - Movement Bonus is extra movement you can have. It is automatically calculated, based on your speed increases in battle.
+    - Land, Burrow, Climb, Fly, Hover, and Swim is your ability to move in the specified way.
+    - Boosts Per Session is the number of boosts you get at the start of every session. It is automatically calculated.
+    - Current Session Boosts is the number of boosts you have left for the session. Bonus Boosts are any boosts you gained for spectacular roleplay.
 - Make Skill Check is a utility button that performs a dot roll for a certain skill check. The system will prompt you for the Attribute, Expertise, and Skill you want to use, as well as the difficulty of the check.
 - Do Dot Roll is a utility button that performs any dot roll you wish. The system will prompt you for the pool size, the difficulty, and the explosion threshold.
 - Attributes, Expertises, Natural Skills, Trained Skills, and Knowledge Skills are broken out into separate blocks. The B column is for bonuses for each stat.
@@ -30,11 +38,12 @@ The basic tab contains the blocks for your general attributes.
 
 ### Combat
 The Combat tab contains useful blocks for being in combat.
-- Quick Reference Stats and Movement are the same as the Basic table
+- Quick Reference blocks are the same as the Basic tab
 - The Stat Change block are changes to your battle stats. They are divided in two: In Battle changes end at the end of battle, while Out of Battle changes last long-term, possibly forever. Stats with an asterisk must be handled manually!
     - Physical and Special Damage must be factored in manually. Add this number to the number of successes for a physical or special attack damage roll, respectively.
     - Crit Chance is complex logic, and will require manual rolling.
     - Initiative changes affect the turn order in specific ways that can't be controlled by a character sheet script.
+- The Primeval Powers block will help you keep track of your type-based weaknesses and resistences.
 - The Conditions block are afflicitions you've received during battle. Any number of conditions can be applied at once. The "Clear All" button will remove all conditions you have.
     - Name is the name of the condition. This is free-text, to support custom conditions.
     - Level is the level of the condition. Conditions start at Level 1, and can increase up to Level 3. Each successful Cleanse reduces the level by 1.
@@ -93,14 +102,14 @@ This tab allows you to record your inventory. At the top are some useful fields:
 - A checkbox which indicates if you are encumbered.
 - A checkbox which indicates if you are overencumbered.
 
-### All Tabs
-This lets you view all tabs at once, if that is better for your workflow.
-
 After clicking Add, you can use these fields:
 - The name of the item
 - The bulk of the item, in intervals of 0.1.
 - The number of that item you have.
 - The total, which is equal to the bulk times the quantity.
+
+### All Tabs
+This lets you view all tabs at once, if that is better for your workflow.
 
 ### Init Character
 This button is not a tab, but instead initializes a character. It will:
@@ -112,11 +121,9 @@ Note that this doesn't actually clear anything out, so it is not explictly dange
 
 ## Known Issues
 - Damage Rolls always assume you want the 1.5x bonus for a Crit. If you want the option for exploding 9s, you will have to roll manually for now.
-- Current Bulk display gets squirrely when using numbers not representable in binary, such as 0.3. 
+- Current Bulk display gets squirrely when using numbers not representable in binary. Example: Having three items of 0.1 bulk shows as "0.30000000000000004"
 - Max Bulk could be computed, but currently is manually entered.
-- Temp HP and Current HP are separate stats, so displaying hp in a token bar will not show the Temp HP. Extra Max HP *is* factored into Max HP, so that will display correctly.
 
 ## Future Enhancements
 - Armor section. (Armor is currently being heavily edited, so I won't add this until it's stable)
 - Display condensed Attack List on Combat tab
-- Typing Block as a Global block

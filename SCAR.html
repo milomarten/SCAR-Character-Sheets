@@ -102,7 +102,7 @@
                     <th class="gray">Special Evasion</th>
                     <th class="gray">Special Integrity</th>
                     <th class="gray">Soul Save</th>
-                    <th class="gray">Boosts Per Session</th>
+                    <th class="gray">Movement Bonus</th>
                 </tr>
                 <tr>
                     <td>
@@ -126,8 +126,8 @@
                         <span name="attr_soul_save"></span>
                     </td>
                     <td>
-                        <input type="hidden" name="attr_boost_per_session">
-                        <span name="attr_boost_per_session"></span>
+                        <input type="hidden" name="attr_movement_bonus">
+                        <span name="attr_movement_bonus"></span>
                     </td>
                 </tr>
             </table>
@@ -135,7 +135,7 @@
         <div id="movement" class="section">
             <table>
                 <tr>
-                    <th class="crimson large" colspan="6">Movement <span name="attr_movement_bonus"></span></th>
+                    <th class="crimson large" colspan="6">Quick Reference Stats 2</th>
                 </tr>
                 <tr>
                     <th class="gray" scope="col">Land</th>
@@ -152,6 +152,19 @@
                     <td class="white"><input type="number" name="attr_movement_fly" value="0"/></td>
                     <td class="white"><input type="number" name="attr_movement_hover" value="0"/></td>
                     <td class="white"><input type="number" name="attr_movement_swim" value="0"/></td>
+                </tr>
+                <tr>
+                    <th class="gray" scope="col" colspan="2">Boosts Per Session</th>
+                    <th class="gray" scope="col" colspan="2">Current Session Boosts</th>
+                    <th class="gray" scope="col" colspan="2">Bonus Boosts</th>
+                </tr>
+                <tr>
+                    <td class="white" colspan="2">
+                        <input type="hidden" name="attr_boost_per_session">
+                        <span name="attr_boost_per_session"></span>
+                    </td>
+                    <td class="white" colspan="2"><input type="number" name="attr_current_session_boosts" value="0"/></td>
+                    <td class="white" colspan="2"><input type="number" name="attr_bonus_boosts" value="0"/></td>
                 </tr>
             </table>
         </div>
@@ -653,7 +666,7 @@
                     <th class="gray">Special Evasion</th>
                     <th class="gray">Special Integrity</th>
                     <th class="gray">Soul Save</th>
-                    <th class="gray">Boosts Per Session</th>
+                    <th class="gray">Movement Bonus</th>
                 </tr>
                 <tr>
                     <td>
@@ -677,16 +690,16 @@
                         <span name="attr_soul_save"></span>
                     </td>
                     <td>
-                        <input type="hidden" name="attr_boost_per_session">
-                        <span name="attr_boost_per_session"></span>
+                        <input type="hidden" name="attr_movement_bonus">
+                        <span name="attr_movement_bonus"></span>
                     </td>
                 </tr>
             </table>
         </div>
-        <div id="movement" class="section">
+        <div id="movement2" class="section">
             <table>
                 <tr>
-                    <th class="crimson large" colspan="6">Movement <span name="attr_movement_bonus"></span></th>
+                    <th class="crimson large" colspan="6">Quick Reference Stats 2</th>
                 </tr>
                 <tr>
                     <th class="gray" scope="col">Land</th>
@@ -703,6 +716,19 @@
                     <td class="white"><input type="number" name="attr_movement_fly" value="0"/></td>
                     <td class="white"><input type="number" name="attr_movement_hover" value="0"/></td>
                     <td class="white"><input type="number" name="attr_movement_swim" value="0"/></td>
+                </tr>
+                <tr>
+                    <th class="gray" scope="col" colspan="2">Boosts Per Session</th>
+                    <th class="gray" scope="col" colspan="2">Current Session Boosts</th>
+                    <th class="gray" scope="col" colspan="2">Bonus Boosts</th>
+                </tr>
+                <tr>
+                    <td class="white" colspan="2">
+                        <input type="hidden" name="attr_boost_per_session">
+                        <span name="attr_boost_per_session"></span>
+                    </td>
+                    <td class="white" colspan="2"><input type="number" name="attr_current_session_boosts" value="0"/></td>
+                    <td class="white" colspan="2"><input type="number" name="attr_bonus_boosts" value="0"/></td>
                 </tr>
             </table>
         </div>
@@ -770,8 +796,27 @@
                 </tr>
             </table>
         </div>
-        <div id="conditions" class="section">
-            <div class="conditions repeating-row-table full-size">
+        <div id="conditions-and-types">
+            <div class="types section">
+                <table>
+                    <tr>
+                        <th colspan="2" class="large crimson">Primeval Powers</th>
+                    </tr>
+                    <tr>
+                        <th class="gray">Weaknesses</th>
+                        <td>
+                            <textarea name="attr_type_weaknesses" class="small-textarea" rows="2"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="gray">Resistences</th>
+                        <td>
+                            <textarea name="attr_type_resistences" class="small-textarea" rows="2"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="conditions repeating-row-table full-size grid-like-padding">
                 <div class="header">
                     <!--Row 1-->
                     <div class="crimson repeating-colspan-4 large">Conditions <button type="action" name="act_clear_conditions">Clear All</button></div>
