@@ -93,8 +93,8 @@
                     </td>
                     <td><input type="number" name="attr_temp_hp" value="0"/></td>
                     <td><input type="number" name="attr_extra_max_hp" value="0"/></td>
-                    <td><input type="number" name="attr_current_exhaustion" value="0"/></td>
-                    <td><input type="number" name="attr_exhaustion_penalty" value="0"/></td>
+                    <td><input type="number" name="attr_current_exhaustion" value="0" min="0"/></td>
+                    <td><span name="attr_exhaustion_penalty"></span></td>
                 </tr>
                 <tr>
                     <th class="gray">Physical Evasion</th>
@@ -163,7 +163,7 @@
             <table>
                 <tr>
                     <th class="crimson large" colspan="3" scope="colgroup">Attributes</th>
-                    <th class="gray large" scope="col">B</th>
+                    <th class="gray large" scope="col">Bonus</th>
                 </tr>
                 <tr>
                     <th class="gray" colspan="4" scope="colgroup">Primary Attributes</th>
@@ -227,7 +227,7 @@
             <table>
                 <tr>
                     <th class="crimson large" colspan="3" scope="colgroup">Expertise</th>
-                    <th class="gray large" scope="col">B</th>
+                    <th class="gray large" scope="col">Bonus</th>
                 </tr>
                 <tr>
                     <th class="gray" scope="row">Charming</th>
@@ -315,7 +315,7 @@
             <table>
                 <tr>
                     <th class="crimson large" colspan="3" scope="colgroup">Natural Skills</th>
-                    <th class="gray large" scope="col">B</th>
+                    <th class="gray large" scope="col">Bonus</th>
                 </tr>
                 <tr>
                     <th class="gray" scope="row">Athletics</th>
@@ -416,7 +416,7 @@
             <table>
                 <tr>
                     <th class="crimson large" colspan="3" scope="colgroup">Trained Skills</th>
-                    <th class="gray large" scope="col">B</th>
+                    <th class="gray large" scope="col">Bonus</th>
                 </tr>
                 <tr>
                     <th class="gray" scope="row">Acrobatics</th>
@@ -514,7 +514,7 @@
             <table>
                 <tr>
                     <th class="crimson large" colspan="3" scope="colgroup">Knowledge Skills</th>
-                    <th class="gray large" scope="col">B</th>
+                    <th class="gray large" scope="col">Bonus</th>
                 </tr>
                 <tr>
                     <th class="gray" scope="row">Academics</th>
@@ -640,8 +640,8 @@
                     </td>
                     <td><input type="number" name="attr_temp_hp" value="0"/></td>
                     <td><input type="number" name="attr_extra_max_hp" value="0"/></td>
-                    <td><input type="number" name="attr_current_exhaustion" value="0"/></td>
-                    <td><input type="number" name="attr_exhaustion_penalty" value="0"/></td>
+                    <td><input type="number" name="attr_current_exhaustion" value="0" min="0"/></td>
+                    <td><span name="attr_exhaustion_penalty"></span></td>
                 </tr>
                 <tr>
                     <th class="gray">Physical Evasion</th>
@@ -1409,6 +1409,23 @@
             })
         })
     })
+
+    on('change:current_exhaustion', () => {
+        getAttrs(['current_exhaustion'], arr => {
+            let penalty = 0;
+            let exh = parseInt(arr['current_exhaustion']);
+            if (exh < 4) { penalty = 0; }
+            else if (exh < 8) { penalty = -1; }
+            else if (exh < 12) { penalty = -3; }
+            else if (exh < 16) { penalty = -5; }
+            else if (exh < 20) { penalty = -7; }
+            else { penalty = -9; }
+
+            setAttrs({
+                exhaustion_penalty: penalty
+            });
+        })
+    });
 
     // Evasion and Integrity calculations
     const evasionIntegrityStats = ['body', 'mind', 'soul', ...expertises, 'evasion', 'integrity'].flatMap(stat => [stat, `${stat}_bonus`]);

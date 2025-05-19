@@ -21,7 +21,7 @@ All dot-dice buttons take all the rules into account. Roll20 doesn't natively su
 
 ### Basic
 The basic tab contains the blocks for your general attributes.
-- Quick Reference Stats includes your HP, Exhaustion, Evasions, Integritys, Soul Save, and Boosts per session.
+- Quick Reference Stats includes your HP, Exhaustion, Evasions, Integritys, Soul Save, and Boosts per session. Max HP, Exhaustion Penalty, Evasions, Integrities, Soul Saves, and Boosts Per Session are all automatically calculated for you.
 - Movement breaks your movement distances out by type. When you Speed stat changes, the bonus will also appear here, as +/- the additional feet of movement you gain.
 - Make Skill Check is a utility button that performs a dot roll for a certain skill check. The system will prompt you for the Attribute, Expertise, and Skill you want to use, as well as the difficulty of the check.
 - Do Dot Roll is a utility button that performs any dot roll you wish. The system will prompt you for the pool size, the difficulty, and the explosion threshold.
@@ -92,6 +92,9 @@ This tab allows you to record your inventory. At the top are some useful fields:
 - The maximum bulk you can carry.
 - A checkbox which indicates if you are encumbered.
 - A checkbox which indicates if you are overencumbered.
+
+### All Tabs
+This lets you view all tabs at once, if that is better for your workflow.
 
 After clicking Add, you can use these fields:
 - The name of the item
